@@ -4,6 +4,8 @@ from scipy.io import wavfile
 import numpy as np
 from pydub import AudioSegment
 import wave
+import os
+from pydub.playback import play
 
 '''
 Audio processing code for feature extraction
@@ -110,11 +112,42 @@ class AudioProcessor:
 
         return sample_segments, sample_rate
 
+    def label_wav(self, filedir):
+
+        labels = ['','matt/', 'ryan/', 'both/', 'silence/']
+        counter = 0
+
+        for filename in os.listdir(filedir):
+            if filename.endswith(".wav"):
+                song = AudioSegment.from_wav(filedir + filename)
+                sample_rate, samples = wavfile.read(filedir + filename)
+                for i in range(0, 3):
+                    play(song)
+                category = int(input("0: Quit\n1: Matt\n2: Ryan\n3: Both\n4: Silence\n5: Replay\nElse: Garbage\n"))
+                if category == 0:
+                    print("Quitting...")
+                    return
+                elif category == 5:
+                    for i in range(0, 3):
+                        play(song)
+                elif category > 4 or category < 1:
+                    print("Category number out of bounds!")
+                else:
+                    file_label = labels[category] + str(category) + '_' + str(counter) + '.wav'
+                    print("Writing: ", file_label)
+                    wavfile.write(file_label, sample_rate, samples)
+                    counter += 1
+            else:
+                print("Incompatible file: ", filename)
+
+
+
 # For testing purposes...
 def main():
     audio_proc = AudioProcessor()
     segments, sample_rate = audio_proc.parse_wav_data(0, 0, 1.0, 'test1.wav', True)
-    for seg in segments:
+    audio_proc.label_wav('wav_segments/')
+    #for seg in segments:
         #sample_frequencies, segment_times, spectrogram = audio_proc.wav_to_spectrogram(seg, sample_rate)
         #audio_proc.plot_spectrogram(sample_frequencies, segment_times, spectrogram)
     #freq, times, spec = audio_proc.wav_to_spectrogram('test.wav')
