@@ -67,14 +67,16 @@ class AudioProcessor:
     Outputs: sample_segments (ndarray) -- array of arrays of segmented samples
 
     '''
-    def parse_wav_data(self, samples, sample_rate, interval_length, wav_path=None, write_enable=False):
-        if interval_length < 0.2:
-            print("Interval length too low!")
-            return None
+    def parse_wav_data(self, samples=None, sample_rate=None, interval_length=1.0, wav_path=None, write_enable=False):
 
         # Check for filepath
         if wav_path != None:
             sample_rate, samples = wavfile.read(wav_path)
+
+        # Check for actual samples
+        if len(samples) <= 0 or sample_rate == None:
+            print("Error with samples and sampling rate!")
+            return None
 
         # Iterator for writing files
         num_segments = 0
@@ -107,12 +109,23 @@ class AudioProcessor:
             # Append new segment to list
             sample_segments.append(current_segment)
             # Adjust slices for next iteration
-            t1 = t2 + 1.0
+            t1 = t2
             t2 = t1 + interval_length
 
         return sample_segments, sample_rate
 
+    '''
+    Description: Sort by hand the segmented wav files. Writes to labeled folders
+
+    Inputs: filedir (string) -- file directory of the segmented wav files
+    Outputs: None
+
+    '''
     def label_wav(self, filedir):
+
+        # TODO: Make this be able to use arbitrary labels as pased in.
+        # Maybe implement a GUI? Also unlimited replays.
+        # Also, choose a better filename
 
         labels = ['','matt/', 'ryan/', 'both/', 'silence/']
         counter = 0
@@ -145,8 +158,8 @@ class AudioProcessor:
 # For testing purposes...
 def main():
     audio_proc = AudioProcessor()
-    segments, sample_rate = audio_proc.parse_wav_data(0, 0, 1.0, 'test1.wav', True)
-    audio_proc.label_wav('wav_segments/')
+    segments, sample_rate = audio_proc.parse_wav_data(interval_length=1.0, wav_path='test1.wav', write_enable=True)
+    #audio_proc.label_wav('wav_segments/')
     #for seg in segments:
         #sample_frequencies, segment_times, spectrogram = audio_proc.wav_to_spectrogram(seg, sample_rate)
         #audio_proc.plot_spectrogram(sample_frequencies, segment_times, spectrogram)
