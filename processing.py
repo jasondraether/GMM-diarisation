@@ -6,6 +6,7 @@ from pydub import AudioSegment
 import wave
 import os
 from pydub.playback import play
+import random
 
 '''
 Audio processing code for feature extraction
@@ -103,7 +104,8 @@ class AudioProcessor:
             current_segment = samples[int(lower_slice):int(upper_slice)]
             # Write to output .wav file
             if write_enable == True:
-                filename = 'wav_segments/wav_slice' + str(num_segments) + '.wav'
+                name, ext = os.path.splitext(wav_path)
+                filename = 'wav_segments/' + name + '_segment_' + str(num_segments) + '.wav'
                 num_segments += 1
                 wavfile.write(filename, sample_rate, current_segment)
             # Append new segment to list
@@ -121,24 +123,31 @@ class AudioProcessor:
     Outputs: None
 
     '''
-    def label_wav(self, labels=None, filedir=None, file_target='Labeled_Wavs/'):
+    def label_wav(self, labels=None, filedir=None, file_target='labeled_wavs/'):
 
         # Check if user gave us any labels
-        if labels == None:
-            print("Invalid labels provided!")
-            return None
+        if labels == None or len(labels) == 0:
+            print('Invalid labels provided!')
+            return
         else:
-            defaults = ['Background','Silence','Unknown','Replay','Quit']
+            defaults = ['Background','Silence','Unknown','Skip','Replay','Quit']
+            lowercase_defaults = [item.lower() for item in defaults]
+            lowercase_labels = [item.lower() for item in labels]
+            # Remove duplicates
+            for label in lowercase_labels:
+                if label in lowercase_defaults:
+                    removed_index = lowercase_labels.index(label)
+                    print('Duplicate label: ', labels[removed_index])
+                    labels.remove(labels[removed_index])
             labels.extend(defaults)
-
         # Check for file directory
         if filedir == None:
-            print("Please specify directory of segmented .wav files!")
-            return None
+            print('Please specify directory of segmented .wav files!')
+            return
 
         # Warn them about writing to default directory
-        if file_target == 'Labeled_Wavs/':
-            print("Warning: Using default write directory of '", file_target,"' !")
+        if file_target == 'labeled_wavs/':
+            print('Warning: Using default write directory of '', file_target,'' !')
 
         # Used to label file number
         file_counter = []
@@ -151,9 +160,9 @@ class AudioProcessor:
             file_counter.append(0)
 
         # User prompt
-        prompt = ''
+        prompt = '\nPlease select one:\n'
 
-        # Craft custom prompt for user
+        # Craft custom prompt for user, and check if directories exist
         option_index = 0
         for label in labels:
             prompt += str(option_index)
@@ -161,73 +170,60 @@ class AudioProcessor:
             prompt += label
             prompt += '\n'
             option_index += 1
-
-        # Input index of replay option
-        replay_index = label_size - 2
+            # Add directory if it doesn't exist
+            if label != 'Quit' and label != 'Replay':
+                if not os.path.exists(file_target + label):
+                    os.makedirs(file_target + label)
 
         # Go through all the .wav files and apply labels as specified by user
-        for filename in os.listdir(filedir):
-            if filename.endswith(".wav"):
+        file_batch = os.listdir(filedir)
+        random.shuffle(file_batch)
+        for filename in file_batch:
+            if filename.endswith('.wav'):
                 sample_rate = 0
-                # 'song' is the playable variable for audio
-                song = AudioSegment.from_wav(filedir + filename)
-                with wave.open(filename, "rb") as wave_file:
-                    sample_rate = wave_file.getframerate()
+                sample_rate, samples = wavfile.read(filedir + filename)
                 # If we have a bad .wav file, skip over it
-                if sample_rate == 0:
-                    print("Invalid sampling rate for file: ", filename)
+                if sample_rate == 0 or len(samples) == 0:
+                    print('Invalid WAVE file at: ', filename)
                     continue
+                # Play the audio clip
+                song = AudioSegment.from_wav(filedir + filename)
                 play(song)
+
                 # Loop until valid input or replay song
                 while True:
                     input_index = int(input(prompt))
-                    if user_input == replay_index:
-                        play(song)
-                        continue
-                    elif input_index >= 0 and input_index < label_size:
-                        break
-                    print("Invalid index! Try again.")
-
-            else:
-                print("Invalid file type for: ", filename)
-
-        # TODO: Make this be able to use arbitrary labels as pased in.
-        # Maybe implement a GUI? Also unlimited replays.
-        # Also, choose a better filename
-
-        labels = ['','matt/', 'ryan/', 'both/', 'silence/']
-        counter = 0
-
-        for filename in os.listdir(filedir):
-            if filename.endswith(".wav"):
-                song = AudioSegment.from_wav(filedir + filename)
-                sample_rate, samples = wavfile.read(filedir + filename)
-                for i in range(0, 3):
-                    play(song)
-                category = int(input("0: Quit\n1: Matt\n2: Ryan\n3: Both\n4: Silence\n5: Replay\nElse: Garbage\n"))
-                if category == 0:
-                    print("Quitting...")
+                    # Valid index
+                    if input_index >= 0 and input_index < label_size:
+                        # Replay audio clip and repeat
+                        if labels[input_index] == 'Replay':
+                            play(song)
+                            continue
+                        else:
+                            break
+                    print('Invalid index! Try again.')
+                # Quit option
+                if labels[input_index] == 'Quit':
+                    print('Quitting...')
                     return
-                elif category == 5:
-                    for i in range(0, 3):
-                        play(song)
-                elif category > 4 or category < 1:
-                    print("Category number out of bounds!")
+                # Write WAVE file
                 else:
-                    file_label = labels[category] + str(category) + '_' + str(counter) + '.wav'
-                    print("Writing: ", file_label)
+                    curr_label = labels[input_index]
+                    while True:
+                        file_label = file_target + curr_label + '/' + curr_label + '_' + str(file_counter[input_index]) + '.wav'
+                        file_counter[input_index] += 1
+                        if not os.path.isfile(file_label):
+                            break
                     wavfile.write(file_label, sample_rate, samples)
-                    counter += 1
+                    print('Writing labeled file at: ', file_label)
             else:
-                print("Incompatible file: ", filename)
-
-
+                print('Invalid file type for: ', filename)
 
 # For testing purposes...
 def main():
     audio_proc = AudioProcessor()
-    segments, sample_rate = audio_proc.parse_wav_data(interval_length=1.0, wav_path='test1.wav', write_enable=True)
-    #audio_proc.label_wav('wav_segments/')
+    #segments, sample_rate = audio_proc.parse_wav_data(interval_length=1.0, wav_path='test1.wav', write_enable=True)
+    audio_proc.label_wav(labels=['Ryan', 'Matt', 'Both'], filedir='wav_segments/', file_target='labeled_wavs/')
     #for seg in segments:
         #sample_frequencies, segment_times, spectrogram = audio_proc.wav_to_spectrogram(seg, sample_rate)
         #audio_proc.plot_spectrogram(sample_frequencies, segment_times, spectrogram)
