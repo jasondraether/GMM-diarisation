@@ -121,7 +121,75 @@ class AudioProcessor:
     Outputs: None
 
     '''
-    def label_wav(self, filedir):
+    def label_wav(self, labels=None, filedir=None, file_target='Labeled_Wavs/'):
+
+        # Check if user gave us any labels
+        if labels == None:
+            print("Invalid labels provided!")
+            return None
+        else:
+            defaults = ['Background','Silence','Unknown','Replay','Quit']
+            labels.extend(defaults)
+
+        # Check for file directory
+        if filedir == None:
+            print("Please specify directory of segmented .wav files!")
+            return None
+
+        # Warn them about writing to default directory
+        if file_target == 'Labeled_Wavs/':
+            print("Warning: Using default write directory of '", file_target,"' !")
+
+        # Used to label file number
+        file_counter = []
+
+        # Number of labels given
+        label_size = len(labels)
+
+        # Start counter at 0 for each label
+        for i in range(0, label_size):
+            file_counter.append(0)
+
+        # User prompt
+        prompt = ''
+
+        # Craft custom prompt for user
+        option_index = 0
+        for label in labels:
+            prompt += str(option_index)
+            prompt += ': '
+            prompt += label
+            prompt += '\n'
+            option_index += 1
+
+        # Input index of replay option
+        replay_index = label_size - 2
+
+        # Go through all the .wav files and apply labels as specified by user
+        for filename in os.listdir(filedir):
+            if filename.endswith(".wav"):
+                sample_rate = 0
+                # 'song' is the playable variable for audio
+                song = AudioSegment.from_wav(filedir + filename)
+                with wave.open(filename, "rb") as wave_file:
+                    sample_rate = wave_file.getframerate()
+                # If we have a bad .wav file, skip over it
+                if sample_rate == 0:
+                    print("Invalid sampling rate for file: ", filename)
+                    continue
+                play(song)
+                # Loop until valid input or replay song
+                while True:
+                    input_index = int(input(prompt))
+                    if user_input == replay_index:
+                        play(song)
+                        continue
+                    elif input_index >= 0 and input_index < label_size:
+                        break
+                    print("Invalid index! Try again.")
+
+            else:
+                print("Invalid file type for: ", filename)
 
         # TODO: Make this be able to use arbitrary labels as pased in.
         # Maybe implement a GUI? Also unlimited replays.
