@@ -25,7 +25,7 @@ class AudioProcessor:
              segment_times (ndarray) -- times in wav file
              spectrogram (ndarray) -- spectrogram values in wav file
     '''
-    def wav_to_spectrogram(self, samples, sample_rate, wav_path=None):
+    def wav_to_spectrogram(self, samples=None, sample_rate=None, wav_path=None):
 
         # Check for .wav path
         if wav_path != None:
@@ -33,9 +33,6 @@ class AudioProcessor:
 
         # Convert wavfile data to spectrogram
         sample_frequencies, segment_times, spectrogram = signal.spectrogram(samples, sample_rate)
-
-        print("NORMAL SPEC SHAPE:")
-        print(spectrogram.shape)
 
         return sample_frequencies, segment_times, spectrogram
 
@@ -229,10 +226,10 @@ class AudioProcessor:
 def main():
     audio_proc = AudioProcessor()
     segments, sample_rate = audio_proc.parse_wav_data(interval_length=1.0, wav_path='test1.wav', write_enable=True)
-    #audio_proc.label_wav(labels=['Ryan', 'Matt', 'Both'], filedir='wav_segments/', file_target='labeled_wavs/')
-    for seg in segments:
-        sample_frequencies, segment_times, spectrogram = audio_proc.wav_to_spectrogram(seg, sample_rate)
-        audio_proc.plot_spectrogram(sample_frequencies, segment_times, spectrogram)
+    audio_proc.label_wav(labels=['Ryan', 'Matt', 'Both'], filedir='wav_segments/', file_target='labeled_wavs/')
+    #for seg in segments:
+    #    sample_frequencies, segment_times, spectrogram = audio_proc.wav_to_spectrogram(seg, sample_rate)
+    #    audio_proc.plot_spectrogram(sample_frequencies, segment_times, spectrogram)
     #freq, times, spec = audio_proc.wav_to_spectrogram('test.wav')
     #audio_proc.plot_spectrogram(freq, times, spec)
 
