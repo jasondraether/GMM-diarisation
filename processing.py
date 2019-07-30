@@ -108,7 +108,7 @@ class AudioProcessor:
             # Write to output .wav file
             if write_enable == True:
                 name, ext = os.path.splitext(wav_path)
-                filename = 'wav_segments/' + name + '_segment_' + str(num_segments) + '.wav'
+                filename = 'wav_segments/' + '{:08d}'.format(num_segments) + '.wav'
                 num_segments += 1
                 wavfile.write(filename, sample_rate, current_segment)
             # Append new segment to list
@@ -180,8 +180,8 @@ class AudioProcessor:
 
         # Go through all the .wav files and apply labels as specified by user
         file_batch = os.listdir(filedir)
-        random.shuffle(file_batch)
-        for filename in file_batch:
+        #random.shuffle(file_batch)
+        for filename in sorted(file_batch):
             if filename.endswith('.wav'):
                 sample_rate = 0
                 sample_rate, samples = wavfile.read(filedir + filename)

@@ -1,4 +1,4 @@
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 from keras.layers import Dense, Conv1D, Flatten, MaxPooling1D, Dropout, Activation
 from keras import regularizers, optimizers
 from keras.utils import to_categorical
@@ -64,7 +64,17 @@ class NeuralNetwork:
         # Will overwrite previous model
         self.model.save(self.model_path)
 
+    def load_model(self):
+        self.model = load_model(self.model_path)
+
+    def test_model(self, test_x):
+        predictions = self.model.predict(test_x)
+        print(predictions)
+
+
+
 if __name__ == '__main__':
+
 
     batch_size=1
     epochs=200
@@ -75,6 +85,9 @@ if __name__ == '__main__':
     labels = ['Matt', 'Ryan']
 
     nn = NeuralNetwork(input_shape=(129, 196), output_labels=labels)
+    nn.load_model()
+    
+    
     nn.create_model()
     nn.model.summary()
 
