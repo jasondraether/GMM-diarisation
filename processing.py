@@ -34,7 +34,7 @@ class AudioProcessor:
         # Convert wavfile data to spectrogram
         sample_frequencies, segment_times, spectrogram = signal.spectrogram(samples, sample_rate)
 
-        return sample_frequencies, segment_times, spectrogram
+        return spectrogram
 
     '''
     Description: Plot spectrogram

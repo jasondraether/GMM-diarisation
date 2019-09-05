@@ -60,75 +60,53 @@ class NeuralNetwork:
         self.model = model
 
     def save_model(self):
-
         # Will overwrite previous model
         self.model.save(self.model_path)
 
     def load_model(self):
         self.model = load_model(self.model_path)
 
-    def test_model(self, test_x):
-        predictions = self.model.predict(test_x)
-        print(predictions)
+    def train_model(self, data_directory, batch_size, epochs, validation_split):
+        self.label_dictionary = {label:index for index,label in enumerate(self.output_labels)}
+        audio_proc = processing.AudioProcessor()
+        training_directories = [data_directory+label+'/' for label in labels]
+        training_files = [os.listdir(dir) for dir in training_directories] # Should be 2D
+        num_files = sum(len(file) for file in training_files)
 
+        x_train = []
+        y_train = []
+
+        x_train += [audio_proc.wav_to_spectrogram(wav_path=matt_dir+matt_wav) for matt_wav in os.listdir(matt_dir)]
+        y_train += [label_dictionary['Matt'] for x in range(0, len(x_train))
+
+        x_train += [audio_proc.wav_to_spectrogram(wav_path=ryan_dir+ryan_wav) for ryan_wav in os.listdir(ryan_dir)]
+        y_train += [label_dictionary['Ryan'] for x in range(0, len(x_train))
+
+        y_train = to_categorical(y_train)
+
+        nn.model.fit(x_train, y_train, shuffle=True, epochs=epochs, validation_split=validation_split, validation_steps=int((num_files*validation_split)//batch_size), steps_per_epoch=int((num_files*(1-validation_split))//batch_size))
+        self.save_model()
+
+    def test_model(self, test_directory):
+        self.load_model()
+        audio_proc = processing.AudioProcessor()
+        x_test = [audio_proc.wav_to_spectrogram(wav_path=test_directory) for test_wav in os.listdir(test_directory)]
+        predictions = self.model.predict(test_x)
+        with open('predictions.txt', 'w') as f:
+            for pred in predictions:
+                f.write("%s\n" % pred)
 
 
 if __name__ == '__main__':
 
-
-    batch_size=1
+    batch_size=50
     epochs=200
     validation_split=0.1
-
-
-    label_dictionary = {'Matt':0, 'Ryan':1}
+    data_directory='labeled_wavs/'
+    input_shape=(129, 196) # Find a way to implement this better?
     labels = ['Matt', 'Ryan']
 
-    nn = NeuralNetwork(input_shape=(129, 196), output_labels=labels)
-    nn.load_model()
-    
-    
+    nn = NeuralNetwork(input_shape=input_shape, output_labels=labels)
     nn.create_model()
     nn.model.summary()
-
-    audio_proc = processing.AudioProcessor()
-    data_directory = 'labeled_wavs/'
-
-    matt_dir = data_directory+labels[0]+'/'
-    ryan_dir = data_directory+labels[1]+'/'
-
-    matt_files = os.listdir(matt_dir)
-    ryan_files = os.listdir(ryan_dir)
-
-    print(matt_files)
-    print(ryan_files)
-    num_files = len(matt_files) + len(ryan_files)
-    print(num_files)
-    data_shape = (num_files, nn.input_shape[0], nn.input_shape[1])
-
-    x_train = np.empty(shape=data_shape)
-    y_train = np.empty(shape=num_files)
-    i = 0
-    for matt_wav in os.listdir(matt_dir):
-        print(matt_wav)
-        sample_freq, segment_times, spec = audio_proc.wav_to_spectrogram(wav_path=matt_dir+matt_wav)
-        x_train[i] = spec
-        y_train[i] = label_dictionary['Matt']
-        i+=1
-    for ryan_wav in os.listdir(ryan_dir):
-        sample_freq, segment_times, spec = audio_proc.wav_to_spectrogram(wav_path=ryan_dir+ryan_wav)
-        x_train[i] = spec
-        y_train[i] = label_dictionary['Ryan']
-        i+=1
-
-    y_train = to_categorical(y_train)
-
-    print(num_files*0.1)
-
-    print(int((num_files*0.1)//batch_size))
-    nn.model.fit(x_train, y_train, shuffle=True, epochs=epochs, validation_split=0.1, validation_steps=int((num_files*0.1)//batch_size), steps_per_epoch=int((num_files*0.9)//batch_size))
-
-    nn.save_model()
-
-    # Put spectrograms from labeled .wavs into
-    # a training set, shuffle, and train
+    nn.train_model(data_directory=data_directory, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
