@@ -1,4 +1,4 @@
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 from keras.layers import Dense, Conv1D, Flatten, MaxPooling1D, Dropout, Activation
 from keras import regularizers, optimizers
 from keras.utils import to_categorical
@@ -64,9 +64,19 @@ class NeuralNetwork:
         # Will overwrite previous model
         self.model.save(self.model_path)
 
+    def load_model(self):
+        self.model = load_model(self.model_path)
+
+    def test_model(self, test_x):
+        predictions = self.model.predict(test_x)
+        print(predictions)
+
+
+
 if __name__ == '__main__':
 
-    batch_size=16
+
+    batch_size=1
     epochs=200
     validation_split=0.1
 
@@ -75,6 +85,9 @@ if __name__ == '__main__':
     labels = ['Matt', 'Ryan']
 
     nn = NeuralNetwork(input_shape=(129, 196), output_labels=labels)
+    nn.load_model()
+    
+    
     nn.create_model()
     nn.model.summary()
 
@@ -87,14 +100,17 @@ if __name__ == '__main__':
     matt_files = os.listdir(matt_dir)
     ryan_files = os.listdir(ryan_dir)
 
+    print(matt_files)
+    print(ryan_files)
     num_files = len(matt_files) + len(ryan_files)
+    print(num_files)
     data_shape = (num_files, nn.input_shape[0], nn.input_shape[1])
 
     x_train = np.empty(shape=data_shape)
     y_train = np.empty(shape=num_files)
     i = 0
     for matt_wav in os.listdir(matt_dir):
-
+        print(matt_wav)
         sample_freq, segment_times, spec = audio_proc.wav_to_spectrogram(wav_path=matt_dir+matt_wav)
         x_train[i] = spec
         y_train[i] = label_dictionary['Matt']
@@ -107,6 +123,9 @@ if __name__ == '__main__':
 
     y_train = to_categorical(y_train)
 
+    print(num_files*0.1)
+
+    print(int((num_files*0.1)//batch_size))
     nn.model.fit(x_train, y_train, shuffle=True, epochs=epochs, validation_split=0.1, validation_steps=int((num_files*0.1)//batch_size), steps_per_epoch=int((num_files*0.9)//batch_size))
 
     nn.save_model()
