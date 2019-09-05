@@ -75,10 +75,17 @@ class AudioProcessor:
 
         # Check for filepath
         if wav_path != None:
-            sample_rate, samples = wavfile.read(wav_path)
+            if os.path.isdir(wav_path):
+                for f in os.listdir(wav_path):
+                    sample_rate, samples_read = wavfile.read(wav_path+f)
+                    samples += samples_read
+            elif os.path.isfile(wav_path):
+                sample_rate, samples = wavfile.read(wav_path)
+            else:
+                print("Unknown data path for .wav files")
 
         # Check for actual samples
-        if len(samples) <= 0 or sample_rate == None:
+        if len(samples) == 0 or sample_rate == None:
             print("Error with samples and sampling rate!")
             return None
 
@@ -225,8 +232,8 @@ class AudioProcessor:
 # For testing purposes...
 def main():
     audio_proc = AudioProcessor()
-    segments, sample_rate = audio_proc.parse_wav_data(interval_length=1.0, wav_path='test1.wav', write_enable=True)
-    audio_proc.label_wav(labels=['Ryan', 'Matt', 'Both'], filedir='wav_segments/', file_target='labeled_wavs/')
+    segments, sample_rate = audio_proc.parse_wav_data(interval_length=1.0, wav_path='data/', write_enable=True)
+    audio_proc.label_wav(labels=['Ryan-Talking', 'Matt-Talking', 'Both-Talking', 'Matt-Laughing', 'Ryan-Laughing', 'Both-Laughing'], filedir='wav_segments/', file_target='labeled_wavs/')
     #for seg in segments:
     #    sample_frequencies, segment_times, spectrogram = audio_proc.wav_to_spectrogram(seg, sample_rate)
     #    audio_proc.plot_spectrogram(sample_frequencies, segment_times, spectrogram)
