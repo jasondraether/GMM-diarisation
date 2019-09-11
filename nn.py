@@ -68,6 +68,7 @@ class NeuralNetwork:
 
     def train_model(self, data_directory, batch_size, epochs, validation_split):
         self.label_dictionary = {label:index for index,label in enumerate(self.output_labels)}
+
         audio_proc = processing.AudioProcessor()
         training_directories = [data_directory+label+'/' for label in labels]
         training_files = [os.listdir(dir) for dir in training_directories] # Should be 2D
@@ -90,11 +91,19 @@ class NeuralNetwork:
     def test_model(self, test_directory):
         self.load_model()
         audio_proc = processing.AudioProcessor()
-        x_test = [audio_proc.wav_to_spectrogram(wav_path=test_directory) for test_wav in os.listdir(test_directory)]
-        predictions = self.model.predict(test_x)
+        filenames = [test_directory+test_wav for test_wav in os.listdir(test_directory)]
+        x_test = [audio_proc.wav_to_spectrogram(wav_path=test_directory+test_wav) for test_wav in filenames]
+        predictions = self.model.predict(x_test)
+        prediction_data = list(zip(predictions,filenames))
         with open('predictions.txt', 'w') as f:
-            for pred in predictions:
-                f.write("%s\n" % pred)
+            f.write("=== List of predictions with prediction and filename ===\n")
+            f.write("Using label dictionary:\n")
+            for key, value in self.label_dictionary.items():
+                f.write("%s\n" % (key,value)) # Write integer labels with text labels
+            f.write("\nPredictions:\n")
+            for pred in prediction_data:
+                f.write("%s\n" % pred) # Write text file of prediction with filename
+
 
 
 if __name__ == '__main__':
