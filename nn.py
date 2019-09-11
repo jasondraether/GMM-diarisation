@@ -12,13 +12,15 @@ audio-learning
 '''
 class NeuralNetwork:
 
-    def __init__(self, input_shape=(0, 0), output_labels=None, learning_rate=0.001, decay=0.001, model_path='models/nn.model', model=None):
+    def __init__(self, input_shape=(0, 0), output_labels=None, learning_rate=0.001, decay=0.001, model_path='models/nn.model', weight_path='models/nn-weights.h5', model=None):
         self.input_shape = input_shape # Shape of spectrogram is (129, 196)
         self.output_labels = output_labels # Classes
         self.learning_rate = learning_rate # Unused
         self.decay = decay # Unused
         self.model = model # Compiled model
         self.model_path = model_path # Path to save model
+        self.weight_path = weight_path # I think this is redundant, but it doesn't hurt to have it implemented
+        self.label_dictionary = {label:index for index,label in enumerate(self.output_labels)}
 
     def start_tf_session():
 
@@ -62,12 +64,13 @@ class NeuralNetwork:
     def save_model(self):
         # Will overwrite previous model
         self.model.save(self.model_path)
+        self.model.save_weights(self.weight_path)
 
     def load_model(self):
         self.model = load_model(self.model_path)
+        self.model.load_weights(self.weight_path)
 
     def train_model(self, data_directory, batch_size, epochs, validation_split):
-        self.label_dictionary = {label:index for index,label in enumerate(self.output_labels)}
 
         audio_proc = processing.AudioProcessor()
         training_directories = [data_directory+label+'/' for label in labels]
@@ -104,11 +107,9 @@ class NeuralNetwork:
             for pred in prediction_data:
                 f.write("%s\n" % pred) # Write text file of prediction with filename
 
-
-
 if __name__ == '__main__':
 
-    test = 0 # 0 if testing, 1 if training
+    test = 0 # 0 if training, 1 if testing
 
     batch_size=50
     epochs=200
