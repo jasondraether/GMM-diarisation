@@ -108,6 +108,8 @@ class NeuralNetwork:
 
 if __name__ == '__main__':
 
+    test = 0 # 0 if testing, 1 if training
+
     batch_size=50
     epochs=200
     validation_split=0.1
@@ -115,7 +117,13 @@ if __name__ == '__main__':
     input_shape=(129, 196) # Find a way to implement this better?
     labels = ['Matt', 'Ryan']
 
-    nn = NeuralNetwork(input_shape=input_shape, output_labels=labels)
-    nn.create_model()
-    nn.model.summary()
-    nn.train_model(data_directory=data_directory, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
+    if test:
+        nn = NeuralNetwork(output_labels=labels)
+        nn.load_model()
+        nn.model.summary()
+        nn.test_model('test_data/')
+    else:
+        nn = NeuralNetwork(input_shape=input_shape, output_labels=labels)
+        nn.create_model()
+        nn.model.summary()
+        nn.train_model(data_directory=data_directory, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
