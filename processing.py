@@ -32,7 +32,7 @@ class AudioProcessor:
             sample_rate, samples = wavfile.read(wav_path)
 
         # Convert wavfile data to spectrogram
-        sample_frequencies, segment_times, spectrogram = signal.spectrogram(samples, sample_rate)
+        sample_frequencies, segment_times, spectrogram = signal.spectrogram(samples, sample_rate, window='hamming')
 
         return spectrogram
 
@@ -51,9 +51,6 @@ class AudioProcessor:
         spectrogram = np.log(spectrogram)
         plt.pcolormesh(times, frequencies, spectrogram)
         plt.imshow(spectrogram)
-
-        print("SPEC LOG SHAPE:")
-        print(spectrogram.shape)
 
         # Set axes
         plt.ylabel('Frequency [Hz]')
@@ -232,12 +229,13 @@ class AudioProcessor:
 # For testing purposes...
 def main():
     audio_proc = AudioProcessor()
-    segments, sample_rate = audio_proc.parse_wav_data(interval_length=1.0, wav_path='data/', write_enable=True)
-    audio_proc.label_wav(labels=['Ryan-Talking', 'Matt-Talking', 'Both-Talking', 'Matt-Laughing', 'Ryan-Laughing', 'Both-Laughing'], filedir='wav_segments/', file_target='labeled_wavs/')
+
+    #segments, sample_rate = audio_proc.parse_wav_data(interval_length=1.0, wav_path='data/', write_enable=True)
+    #audio_proc.label_wav(labels=['Ryan-Talking', 'Matt-Talking', 'Both-Talking', 'Matt-Laughing', 'Ryan-Laughing', 'Both-Laughing'], filedir='wav_segments/', file_target='labeled_wavs/')
     #for seg in segments:
     #    sample_frequencies, segment_times, spectrogram = audio_proc.wav_to_spectrogram(seg, sample_rate)
     #    audio_proc.plot_spectrogram(sample_frequencies, segment_times, spectrogram)
-    #freq, times, spec = audio_proc.wav_to_spectrogram('test.wav')
+    spec = audio_proc.wav_to_spectrogram(wav_path='test-correct.wav')
     #audio_proc.plot_spectrogram(freq, times, spec)
 
 if __name__ == '__main__':

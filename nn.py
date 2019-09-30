@@ -13,7 +13,7 @@ audio-learning
 class NeuralNetwork:
 
     def __init__(self, input_shape=(0, 0), output_labels=None, learning_rate=0.001, decay=0.001, model_path='models/nn.model', weight_path='models/nn-weights.h5', model=None):
-        self.input_shape = input_shape # Shape of spectrogram is (129, 196)
+        self.input_shape = input_shape # Shape of spectrogram is (129, 196) NOTE: This may change based on sampling rates and such. Make sure to have static numbers!
         self.output_labels = output_labels # Classes
         self.learning_rate = learning_rate # Unused
         self.decay = decay # Unused
@@ -52,14 +52,16 @@ class NeuralNetwork:
         model.add(Dropout(0.5))
 
         # Fourth layer
-        model.add(Dense(len(self.output_labels)))
+        model.add(Dense(len(self.output_labels))) # This should be two always
         model.add(Activation('softmax'))
 
-        # Model compiled, ready to train
+        # model compiled, ready to train
         model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
         # Assign model to object
         self.model = model
+
+        # TODO: Add cascaded models, use catagorical_crossentropy for multi-class
 
     def save_model(self):
         # Will overwrite previous model
@@ -75,18 +77,23 @@ class NeuralNetwork:
         audio_proc = processing.AudioProcessor()
         training_directories = [data_directory+label+'/' for label in labels]
         training_files = [os.listdir(dir) for dir in training_directories] # Should be 2D
-        num_files = sum(len(file) for file in training_files)
+        num_files = sum([len(file) for file in training_files])
 
         x_train = []
         y_train = []
 
-        x_train += [audio_proc.wav_to_spectrogram(wav_path=matt_dir+matt_wav) for matt_wav in os.listdir(matt_dir)]
-        y_train += [label_dictionary['Matt'] for x in range(0, len(x_train))
+        for label in labels:
+            wav_paths = os.listdir(data_directory+label)
+            x_train += [audio_proc.wav_to_spectrogram(wav_path=data_directory+label+'/'+class_wav) for class_wav in wav_paths]
+            y_train += [self.label_dictionary[label] for x in range(0, len(wav_paths))]
 
-        x_train += [audio_proc.wav_to_spectrogram(wav_path=ryan_dir+ryan_wav) for ryan_wav in os.listdir(ryan_dir)]
-        y_train += [label_dictionary['Ryan'] for x in range(0, len(x_train))
+        x_train = np.array(x_train)
+        y_train = np.array(y_train)
+        print(y_train.shape)
 
         y_train = to_categorical(y_train)
+
+        print(int((num_files*validation_split)//batch_size))
 
         nn.model.fit(x_train, y_train, shuffle=True, epochs=epochs, validation_split=validation_split, validation_steps=int((num_files*validation_split)//batch_size), steps_per_epoch=int((num_files*(1-validation_split))//batch_size))
         self.save_model()
@@ -111,11 +118,11 @@ if __name__ == '__main__':
 
     test = 0 # 0 if training, 1 if testing
 
-    batch_size=50
-    epochs=200
+    batch_size=5
+    epochs=300
     validation_split=0.1
     data_directory='labeled_wavs/'
-    input_shape=(129, 196) # Find a way to implement this better?
+    input_shape=(129, 71) # 16 kHz, 16-bit PCM encoding, 1 second long
     labels = ['Matt', 'Ryan']
 
     if test:
