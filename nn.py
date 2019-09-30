@@ -13,7 +13,7 @@ audio-learning
 class NeuralNetwork:
 
     def __init__(self, input_shape=(0, 0), output_labels=None, learning_rate=0.001, decay=0.001, model_path='models/nn.model', weight_path='models/nn-weights.h5', model=None):
-        self.input_shape = input_shape # Shape of spectrogram is (129, 196) NOTE: This may change based on sampling rates and such. Make sure to have static numbers!
+        self.input_shape = input_shape # Shape of spectrogram is (129, 71) NOTE: This may change based on sampling rates and such. Make sure to have static numbers!
         self.output_labels = output_labels # Classes
         self.learning_rate = learning_rate # Unused
         self.decay = decay # Unused
@@ -89,11 +89,8 @@ class NeuralNetwork:
 
         x_train = np.array(x_train)
         y_train = np.array(y_train)
-        print(y_train.shape)
 
         y_train = to_categorical(y_train)
-
-        print(int((num_files*validation_split)//batch_size))
 
         nn.model.fit(x_train, y_train, shuffle=True, epochs=epochs, validation_split=validation_split, validation_steps=int((num_files*validation_split)//batch_size), steps_per_epoch=int((num_files*(1-validation_split))//batch_size))
         self.save_model()
