@@ -119,6 +119,7 @@ if __name__ == '__main__':
     epochs=300
     validation_split=0.1
     data_directory='labeled_wavs/'
+    test_directory='test_data/'
     input_shape=(129, 71) # 16 kHz, 16-bit PCM encoding, 1 second long
     labels = ['Matt', 'Ryan']
 
@@ -126,7 +127,7 @@ if __name__ == '__main__':
         nn = NeuralNetwork(output_labels=labels)
         nn.load_model()
         nn.model.summary()
-        nn.test_model('test_data/')
+        nn.test_model(test_directory=test_directory)
     else:
         nn = NeuralNetwork(input_shape=input_shape, output_labels=labels)
         nn.create_model()
