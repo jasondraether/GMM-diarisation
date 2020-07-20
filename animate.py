@@ -7,6 +7,7 @@ height = 1080
 FPS = 60
 seconds = 10
 video_filename = 'animation.mp4'
+
 interval_size = 0.5 # .5 second intervals for animation 
 
 still_filename = 'still.png'
