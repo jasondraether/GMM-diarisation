@@ -22,6 +22,11 @@ class GMMClassifier:
         self.n_components = 32
         self.covariance_type = 'tied'
         self.epsilon = 1e-10
+        self.min_silence_len = 1000
+        self.silence_thresh = -10
+        self.keep_silence = 100
+        self.seek_step = 1
+        self.account_for_silence = True
 
         if os.path.exists(data_directory):
             print("Initializing speech profiles using directory {0}".format(data_directory))
@@ -38,7 +43,7 @@ class GMMClassifier:
 
         print("Adding speech profile for {0} in directory {1}".format(label,profile_directory))
 
-        self.corpus_size[label] = 0
+        self.corpus_dict[label] = 0
 
         assert os.path.exists(profile_directory)
         files = os.listdir(profile_directory)
@@ -50,27 +55,33 @@ class GMMClassifier:
             filepath = os.path.join(profile_directory,filename)
             assert os.path.exists(filepath)
 
-            sample_rate, signal = wavfile.read(filepath)
-            pydub_signal = AudioSegment.from_wav(filepath)
-            assert sample_rate == self.sample_rate
-            # signal = signal.astype(float)
+            if self.account_for_silence:
+                pydub_signal = AudioSegment.from_wav(filepath)
+                split_signal = split_on_silence(audio_segment=pydub_signal,min_silence_len=self.min_silence_len,silence_thresh=self.silence_thresh,\
+                                                keep_silence=self.keep_silence,seek_step=self.seek_step) # More parameters to this, see: https://github.com/jiaaro/pydub/blob/master/pydub/silence.py
 
-            split_signal = split_on_silence(audio_segment=pydub_signal,min_silence_len=1000,silence_thresh=-40,keep_silence=100,seek_step=1) # More parameters to this, see: https://github.com/jiaaro/pydub/blob/master/pydub/silence.py
+                for signal_slice in split_signal:
+                    # play(signal_slice)
+                    sample_rate = signal_slice.frame_rate
+                    assert sample_rate == self.sample_rate
 
-            for signal_slice in split_signal:
-                # play(signal_slice)
-                samples = signal_slice.get_array_of_samples()
-                signal = np.frombuffer(samples,dtype=np.int16)
-                #signal = np.array(samples)
+                    samples = signal_slice.get_array_of_samples()
+                    signal = np.frombuffer(samples,dtype=np.int16)
+                    #signal = np.array(samples)
 
+                    x_train = self.calculate_features(signal=signal,sample_rate=sample_rate)
+
+                    # Resumes where left off, fix this so we don't just throw out samples...
+                    if x_train.shape[0] > 1:
+                        print("{0} samples in this signal slice fitting session".format(x_train.shape[0]))
+                        gmm.fit(x_train)
+                        self.corpus_size[label] += x_train.shape[0]
+
+            else:
+                sample_rate, signal = wavfile.read(filepath)
                 x_train = self.calculate_features(signal=signal,sample_rate=sample_rate)
-
-                # Resumes where left off, fix this so we don't just throw out samples...
-                if x_train.shape[0] > 1:
-                    print("{0} samples in this signal slice fitting session".format(x_train.shape[0]))
-                    print(x_train)
-                    gmm.fit(x_train)
-                    self.corpus_size[label] += x_train.shape[0]
+                gmm.fit(x_train)
+                self.corpus_size[label] += x_train.shape[0]
 
             # TODO: Use labels for clusters (laughing, yelling, normal, etc.)
             # TODO: Add BIC to maximize training v samples
@@ -86,8 +97,9 @@ class GMMClassifier:
         # Scale mfcc's (CMVN)
         if normalize:
             mean = np.mean(mfcc_feats,axis=0)
-            std = np.std(mfcc_feats,axis=0)
-            mfcc_feats = (mfcc_feats - mean)/(std+self.epsilon)
+            mfcc_feats = mfcc_feats - mean
+            # std = np.std(mfcc_feats,axis=0)
+            # mfcc_feats = (mfcc_feats - mean)/(std+self.epsilon) # Maybe change this eventually
 
         delta_feats = delta(mfcc_feats,order=1)
         delta2_feats = delta(mfcc_feats,order=2)
@@ -104,34 +116,52 @@ class GMMClassifier:
         # Score samples for log likelihood (i.e., how plausible is this model?)
         # Predict proba for cluster probability (will sum to 1 for each model)
 
-        assert os.path.exists(filepath)
-        pydub_signal = AudioSegment.from_wav(filepath)
-        split_signal = split_on_silence(audio_segment=pydub_signal,min_silence_len=1000,silence_thresh=-40,keep_silence=100,seek_step=1) # More parameters to this, see: https://github.com/jiaaro/pydub/blob/master/pydub/silence.py
-
-        slice_id = 0
         likelihoods = []
 
-        for signal_slice in split_signal:
-            sample_rate = signal_slice.frame_rate
+        assert os.path.exists(filepath)
+
+        if self.account_for_silence:
+
+            pydub_signal = AudioSegment.from_wav(filepath)
+            split_signal = split_on_silence(audio_segment=pydub_signal,min_silence_len=self.min_silence_len,silence_thresh=self.silence_thresh,\
+                                            keep_silence=self.keep_silence,seek_step=self.seek_step)
+
+            slice_id = 0
+
+            for signal_slice in split_signal:
+                sample_rate = signal_slice.frame_rate
+                assert sample_rate == self.sample_rate
+
+                samples = signal_slice.get_array_of_samples()
+                signal = np.frombuffer(samples,dtype=np.int16)
+
+                x_test = self.calculate_features(signal=signal,sample_rate=sample_rate,normalize=True)
+                log_likelihood = np.zeros((x_test.shape[0],self.n_classes))
+
+                for class_id in range(self.n_classes):
+                    gmm = self.speech_profiles[class_id]
+                    log_likelihood[:,class_id] = gmm.score_samples(x_test)
+
+                likelihoods.append(log_likelihood)
+                average_log_likelihood = np.mean(log_likelihood,axis=0)
+
+                class_prediction = np.argmax(average_log_likelihood)
+
+                print("File {0} of slice {1} predicted to be {2}".format(filepath,slice_id,self.classes[class_prediction]))
+
+        else:
+
+            sample_rate, signal = wavfile.read(filepath)
             assert sample_rate == self.sample_rate
-
-            samples = signal_slice.get_array_of_samples()
-            signal = np.frombuffer(samples,dtype=np.int16)
-
             x_test = self.calculate_features(signal=signal,sample_rate=sample_rate,normalize=True)
             log_likelihood = np.zeros((x_test.shape[0],self.n_classes))
-
-            print(self.n_classes)
             for class_id in range(self.n_classes):
                 gmm = self.speech_profiles[class_id]
                 log_likelihood[:,class_id] = gmm.score_samples(x_test)
-
-            likelihoods.append(log_likelihood)
             average_log_likelihood = np.mean(log_likelihood,axis=0)
-
             class_prediction = np.argmax(average_log_likelihood)
-
-            print("File {0} of slice {1} predicted to be {2}".format(filepath,slice_id,self.classes[class_prediction]))
+            print("File {0} predicted to be {1}".format(filepath,self.classes[class_prediction]))
+            likelihoods.append(log_likelihood)
 
         return likelihoods
 
@@ -154,7 +184,6 @@ def main():
     classes = classifier.get_classes()
     corpus_size = classifier.get_corpus_size()
 
-    print("Corpus dictionary:{0}".format(corpus_size))
 
     test_files = []
     # Create test corpus (might be easier to remake structure so we just have data->classes->test/train)
@@ -174,6 +203,7 @@ def main():
         file_total = 0.0
         likelihoods = classifier.predict_profile(filepath=test[0])
         for log_likelihood in likelihoods:
+            print(log_likelihood.shape)
             for i in range(log_likelihood.shape[0]):
                 pred = np.argmax(log_likelihood[i])
                 file_total += 1.0
@@ -185,6 +215,8 @@ def main():
         print("File {0} of class {1} had per-sample accuracy {2}".format(test[0],test[1],file_correct/file_total))
 
     # TODO: Print metrics (BIC, )
+    print("Corpus dictionary:{0}".format(corpus_size))
+
 
 if __name__ == '__main__':
     main()
