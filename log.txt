@@ -1,0 +1,1152 @@
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9305135951661632
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6112877583465819
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9395770392749244
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6271860095389508
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9358006042296072
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6255961844197139
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9342900302114804
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6287758346581876
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9441087613293051
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.636724960254372
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9607250755287009
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5985691573926868
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9244712990936556
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6073131955484896
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9237160120845922
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6343402225755167
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9395770392749244
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6359300476947536
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9516616314199395
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6343402225755167
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9395770392749244
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6025437201907791
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9509063444108762
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5445151033386327
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.965483234714004
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6956115779645191
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9329388560157791
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6862745098039216
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9428007889546351
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6965452847805789
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9457593688362919
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6825396825396826
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.965483234714004
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6890756302521008
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9792899408284024
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6293183940242764
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9546351084812623
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6928104575163399
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9289940828402367
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7086834733893558
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9447731755424064
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6778711484593838
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9566074950690335
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6619981325863679
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9743589743589743
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6125116713352008
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.985207100591716
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5919701213818861
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9305135951661632
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6112877583465819
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9395770392749244
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6279809220985691
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8935045317220544
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6327503974562798
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9312688821752266
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6359300476947536
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9350453172205438
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6454689984101749
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9554380664652568
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6009538950715422
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9244712990936556
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6073131955484896
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9259818731117825
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6343402225755167
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9395770392749244
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.636724960254372
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9214501510574018
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5850556438791733
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9358006042296072
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6136724960254372
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9652567975830816
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5604133545310016
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.965483234714004
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6956115779645191
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9467455621301775
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6825396825396826
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9437869822485208
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6760037348272643
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9506903353057199
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6825396825396826
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9644970414201184
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6685340802987861
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.97534516765286
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6676003734827264
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9546351084812623
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6928104575163399
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9684418145956607
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6946778711484594
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9447731755424064
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.676937441643324
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9763313609467456
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6984126984126984
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.965483234714004
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6563958916900093
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9911242603550295
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5564892623716153
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8300604229607251
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5222575516693164
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8345921450151057
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5023847376788553
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.7870090634441088
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5620031796502385
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8912386706948641
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5111287758346582
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.872356495468278
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4944356120826709
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9070996978851964
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5111287758346582
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8549848942598187
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5540540540540541
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8919939577039275
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.48569157392686807
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8731117824773413
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5604133545310016
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8889728096676737
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5556438791732909
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9123867069486404
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.49920508744038156
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9622356495468278
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.46502384737678853
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8185404339250493
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5742296918767507
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8057199211045365
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5536881419234361
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8323471400394478
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5312791783380019
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8520710059171598
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5070028011204482
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.849112426035503
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4789915966386555
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9260355029585798
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4715219421101774
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8599605522682445
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5966386554621849
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.878698224852071
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5592903828197946
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8925049309664694
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5452847805788982
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.888560157790927
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5518207282913166
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9043392504930966
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.49019607843137253
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9506903353057199
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4519140989729225
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8300604229607251
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5222575516693164
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8361027190332326
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5031796502384738
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.7764350453172205
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5779014308426074
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8738670694864048
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5103338632750397
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8746223564954683
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5397456279809221
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9237160120845922
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5087440381558028
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8549848942598187
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5540540540540541
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8912386706948641
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.48569157392686807
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.872356495468278
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5580286168521462
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8904833836858006
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5453100158982512
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9146525679758308
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5135135135135135
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9546827794561934
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.47456279809220986
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8185404339250493
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5742296918767507
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8037475345167653
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5536881419234361
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8609467455621301
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5424836601307189
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8530571992110454
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5228758169934641
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8954635108481263
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4295051353874883
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9250493096646942
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.46218487394957986
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8599605522682445
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5966386554621849
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.863905325443787
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5527544351073763
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8925049309664694
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5378151260504201
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8826429980276134
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5004668534080299
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9132149901380671
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.488328664799253
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9506903353057199
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.44911297852474324
+Corpus dictionary:{'matt': 15257, 'ryan': 15297}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9628378378378378
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7341227125941873
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9358108108108109
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7545748116254036
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9684684684684685
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7416576964477933
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9662162162162162
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7222820236813778
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9481981981981982
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.697524219590958
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9831081081081081
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.628632938643703
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9448198198198198
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7524219590958019
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9425675675675675
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7481162540365985
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9324324324324325
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.728740581270183
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.954954954954955
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6986006458557589
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9583333333333334
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6415500538213132
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9786036036036037
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5651237890204521
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9629200463499421
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7334058759521219
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9594438006952491
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7170837867247007
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9409038238702202
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.763873775843308
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.947856315179606
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7475516866158868
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9466975666280417
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6800870511425462
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9826187717265353
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5680087051142546
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9304750869061413
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7595212187159956
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9119351100811124
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7606093579978237
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9490150637311703
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7529923830250272
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9269988412514485
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6920565832426551
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9339513325608343
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6561479869423286
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9756662804171495
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5680087051142546
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9628378378378378
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7341227125941873
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9583333333333334
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.721205597416577
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9515765765765766
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7104413347685683
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9583333333333334
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7470398277717977
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.954954954954955
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7416576964477933
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.972972972972973
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6167922497308934
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9448198198198198
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7524219590958019
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9403153153153153
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.759956942949408
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9177927927927928
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7470398277717977
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9279279279279279
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6867599569429494
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9583333333333334
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6598493003229279
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9740990990990991
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5414424111948332
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9629200463499421
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7334058759521219
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9582850521436849
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7170837867247007
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9316338354577057
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7388465723612623
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9501738122827347
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7388465723612623
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9629200463499421
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7149075081610446
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9791425260718424
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.573449401523395
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9304750869061413
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7595212187159956
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9096176129779838
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7834602829162133
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9246813441483198
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.749727965179543
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9339513325608343
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6931447225244831
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9212050984936269
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6452665941240479
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9733487833140209
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5712731229597389
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8322072072072072
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6038751345532831
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.740990990990991
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.61248654467169
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8524774774774775
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.527448869752422
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8817567567567568
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.511302475780409
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8851351351351351
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.48008611410118407
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9515765765765766
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.3745963401506997
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8828828828828829
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5791173304628633
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8412162162162162
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6038751345532831
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9009009009009009
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5306781485468245
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8997747747747747
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5080731969860065
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9481981981981982
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.45748116254036597
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9628378378378378
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4015069967707212
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8331402085747392
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5919477693144722
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.828505214368482
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5865070729053319
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8435689455388181
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5484221980413493
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8644264194669756
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.499455930359086
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8899188876013905
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4167573449401523
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9212050984936269
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.39934711643090315
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8748551564310545
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5821545157780196
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8794901506373117
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5625680087051143
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8899188876013905
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5473340587595212
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9212050984936269
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.529923830250272
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9374275782155272
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4243743199129489
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9606025492468134
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.3601741022850925
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8322072072072072
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6038751345532831
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8333333333333334
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5532831001076426
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8524774774774775
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5231431646932185
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8558558558558559
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5285252960172229
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8997747747747747
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4381054897739505
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9380630630630631
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.38858988159311086
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8828828828828829
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5791173304628633
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8412162162162162
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6027987082884823
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8817567567567568
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5565123789020452
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9268018018018018
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.48331539289558667
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9256756756756757
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.45317545748116256
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.954954954954955
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.36490850376749195
+Corpus dictionary:{'matt': 12508, 'ryan': 12979}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8331402085747392
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5919477693144722
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.7230590961761297
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6289445048966268
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8308227114716107
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5321001088139282
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8760139049826188
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5092491838955386
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8748551564310545
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.44940152339499456
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9409038238702202
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.3754080522306855
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8748551564310545
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5821545157780196
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8342989571263036
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5995647442872688
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.880648899188876
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5701849836779108
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9038238702201622
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.500544069640914
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9061413673232909
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4309031556039173
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9721900347624566
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.3764961915125136
+Corpus dictionary:{'matt': 12111, 'ryan': 12648}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9365558912386707
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6176470588235294
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9290030211480362
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6422893481717011
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9123867069486404
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6526232114467408
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9290030211480362
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6399046104928457
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9441087613293051
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6327503974562798
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9561933534743202
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6303656597774245
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9365558912386707
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6271860095389508
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9297583081570997
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6454689984101749
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9342900302114804
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6462639109697933
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9335347432024169
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5985691573926868
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9509063444108762
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.609697933227345
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9645015105740181
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5794912559618441
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9822222222222222
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7209062821833162
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9744444444444444
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.756951596292482
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9722222222222222
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7342945417095778
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9677777777777777
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7281153450051493
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9744444444444444
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7229660144181257
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9822222222222222
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6807415036045315
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9755555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7075180226570545
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9755555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7157569515962925
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9577777777777777
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.694129763130793
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9711111111111111
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6498455200823893
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9722222222222222
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6385169927909372
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9922222222222222
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5859938208032955
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9365558912386707
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6176470588235294
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9290030211480362
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6422893481717011
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.904833836858006
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.665341812400636
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.926737160120846
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.636724960254372
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9418429003021148
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6343402225755167
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9720543806646526
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6081081081081081
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9365558912386707
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6271860095389508
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9365558912386707
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.629570747217806
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9138972809667674
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6494435612082671
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9554380664652568
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.615262321144674
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9463746223564955
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5945945945945946
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9622356495468278
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5834658187599364
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9822222222222222
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7209062821833162
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9811111111111112
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7239958805355304
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9777777777777777
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7507723995880535
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9733333333333334
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7250257466529351
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9855555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7312049433573635
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9888888888888889
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6426364572605562
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9755555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7075180226570545
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9755555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.717816683831102
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.96
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.717816683831102
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9722222222222222
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6776519052523172
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9866666666666667
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6560247167868177
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9944444444444445
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.564366632337796
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8111782477341389
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5508744038155803
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.7462235649546828
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5914149443561209
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8330815709969789
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5779014308426074
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8617824773413897
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5039745627980922
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8610271903323263
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5103338632750397
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9003021148036254
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.48569157392686807
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8655589123867069
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.589825119236884
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8716012084592145
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5937996820349761
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8716012084592145
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5604133545310016
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.898036253776435
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.534181240063593
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.904833836858006
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.49523052464228934
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9554380664652568
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.44038155802861684
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8533333333333334
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5736354273944387
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8644444444444445
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5592173017507724
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8644444444444445
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5262615859938208
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8622222222222222
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5118434603501545
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9022222222222223
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.48712667353244077
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9077777777777778
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.427394438722966
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8755555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5952626158599382
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8955555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5756951596292482
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8955555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5396498455200824
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9177777777777778
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5015447991761071
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9355555555555556
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5046343975283213
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9677777777777777
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.44181256436663235
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8111782477341389
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5508744038155803
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.7477341389728097
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5882352941176471
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.851963746223565
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.548489666136725
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8753776435045317
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.505564387917329
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8904833836858006
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5015898251192369
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8987915407854985
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.48330683624801274
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8655589123867069
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.589825119236884
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8716012084592145
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5922098569157392
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8972809667673716
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5675675675675675
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9116314199395771
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5564387917329093
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9146525679758308
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9486404833836858
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.44992050874403816
+Corpus dictionary:{'matt': 20335, 'ryan': 19667}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8533333333333334
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5736354273944387
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.7833333333333333
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5787847579814624
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8633333333333333
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5242018537590113
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8688888888888889
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4984552008238929
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8577777777777778
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.48712667353244077
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.92
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4140061791967044
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8755555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5952626158599382
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8955555555555555
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5756951596292482
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8844444444444445
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.548918640576725
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8777777777777778
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5066941297631308
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9077777777777778
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.49124613800205974
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9622222222222222
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.40885684860968075
+Corpus dictionary:{'matt': 13078, 'ryan': 12927}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9833971902937421
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7299077733860343
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9782886334610472
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7523056653491436
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9808429118773946
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7391304347826086
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9808429118773946
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7299077733860343
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.979565772669221
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7048748353096179
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9974457215836526
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6389986824769434
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9885057471264368
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6982872200263505
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9782886334610472
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7180500658761528
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9770114942528736
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6996047430830039
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9859514687100894
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6521739130434783
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9923371647509579
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6297760210803689
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9948914431673053
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5691699604743083
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9862258953168044
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7169014084507043
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9834710743801653
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7323943661971831
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.987603305785124
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7084507042253522
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9917355371900827
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7211267605633803
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.987603305785124
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6225352112676056
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9972451790633609
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6338028169014085
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.987603305785124
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.676056338028169
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9820936639118457
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6887323943661972
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9752066115702479
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6323943661971831
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9889807162534435
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6563380281690141
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9958677685950413
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5929577464788732
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9944903581267218
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5098591549295775
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9833971902937421
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7299077733860343
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9782886334610472
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7523056653491436
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9872286079182631
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7470355731225297
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9846743295019157
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7193675889328063
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9885057471264368
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7022397891963109
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9936143039591315
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6495388669301713
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9885057471264368
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6982872200263505
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9782886334610472
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7180500658761528
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.979565772669221
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7035573122529645
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9846743295019157
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6613965744400527
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9897828863346104
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6653491436100132
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9961685823754789
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.546772068511199
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9862258953168044
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7169014084507043
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9834710743801653
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7323943661971831
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9848484848484849
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7225352112676057
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9889807162534435
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7267605633802817
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9944903581267218
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.7112676056338029
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9986225895316805
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6126760563380281
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.987603305785124
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.676056338028169
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9820936639118457
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6887323943661972
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9862258953168044
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6549295774647887
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.990358126721763
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6492957746478873
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9944903581267218
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5915492957746479
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9972451790633609
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5295774647887324
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8659003831417624
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5942028985507246
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8646232439335888
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5757575757575758
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8544061302681992
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5783926218708827
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9080459770114943
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5586297760210803
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9054916985951469
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4492753623188406
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9578544061302682
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4005270092226614
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8812260536398467
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.61133069828722
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9003831417624522
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5928853754940712
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8952745849297573
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5270092226613966
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8978288633461047
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5322793148880105
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9259259259259259
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5125164690382081
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9693486590038314
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.43610013175230566
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8608815426997245
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5507042253521127
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8746556473829201
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5366197183098591
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8911845730027548
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5267605633802817
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9104683195592287
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5140845070422535
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9201101928374655
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4098591549295775
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9435261707988981
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.37183098591549296
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8774104683195593
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5915492957746479
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8994490358126722
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5873239436619718
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8856749311294766
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5225352112676056
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8980716253443526
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.523943661971831
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9269972451790633
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5028169014084507
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.977961432506887
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.39859154929577467
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8659003831417624
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5942028985507246
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8250319284802043
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.6205533596837944
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.859514687100894
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4927536231884058
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9042145593869731
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5046113306982872
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9144316730523627
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4453227931488801
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9348659003831418
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.4137022397891963
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8812260536398467
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.61133069828722
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8991060025542784
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5928853754940712
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9080459770114943
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5849802371541502
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9144316730523627
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5032938076416338
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9450830140485313
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5177865612648221
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9693486590038314
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.45322793148880103
+Corpus dictionary:{'matt': 11168, 'ryan': 10604}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8608815426997245
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5507042253521127
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8760330578512396
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5352112676056338
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8677685950413223
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.504225352112676
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8911845730027548
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5140845070422535
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9352617079889807
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.46901408450704224
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9559228650137741
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.3788732394366197
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8774104683195593
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5915492957746479
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8980716253443526
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5887323943661972
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8966942148760331
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5338028169014084
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.8925619834710744
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.5225352112676056
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9435261707988981
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.45492957746478874
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}
+File test_data/matt/6.wav of class matt had per-sample accuracy 0.9669421487603306
+File test_data/ryan/4.wav of class ryan had per-sample accuracy 0.423943661971831
+Corpus dictionary:{'matt': 9961, 'ryan': 9433}

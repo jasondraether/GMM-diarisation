@@ -12,10 +12,27 @@ from itertools import chain, combinations, product
 from time import sleep
 from random import shuffle
 
+cache = []
+cache_parameters = []
+cache_limit = 16
+
+
+# Test parameters randomly
+optimize_randomly = True
+
+# Testing Flags
+test_standard = False
+test_small = True # Just test smaller enumerable parameters, no random shuffling
+test_all_parameters = False # This will test every parameter in the model (Warning: LONG)
+test_files_and_gmm = False # Just tests file combinations and GMM parameters
+test_files_and_parameters = False # This tests all file combinations and ALL parameters in the model (Warning: REALLY LONG)
+test_files_only = False # Just tests all file combinations
+
+
 class GMMClassifier:
 
     # Optimal parameters from testing should be placed in here
-    def __init__(self, data_directory='', from_directory=True, use_emphasis=True, normalize_signal=True, \
+    def __init__(self, data_directory='', from_directory=True, specify_files=False, files_list=[], classes=[],use_emphasis=True, normalize_signal=True, \
     normalize_mfcc=False, use_deltas=True, trim_silence=True, \
     pad_silence=False, n_ccs=13, n_components=4, covariance_type='tied',win_len=0.025, \
     win_step=0.01, frame_length=512, frame_skip=256, top_db=30):
@@ -85,6 +102,7 @@ class GMMClassifier:
                           'frame_skip: {0}'.format(frame_skip), \
                           'top_db: {0}'.format(top_db)]
 
+
     def add_profile(self, label='', files=''):
 
         # Initialize training corpus dictionary
@@ -94,16 +112,43 @@ class GMMClassifier:
 
         gmm = GMM(n_components=self.n_components,covariance_type=self.covariance_type)
 
+        if len(cache) > cache_limit: # Clear cache when too full
+            cache = []
+            cache_parameters = []
+
         for filepath in files:
             assert os.path.exists(filepath)
 
-            # Get audio data from filepath
-            sample_rate, signal = wavfile.read(filepath)
-            assert sample_rate == self.sample_rate
+            self.caching_params = [self.use_emphasis,self.normalize_signal,self.normalize_mfcc,self.use_deltas,self.trim_silence,self.n_ccs,filepath] # ONLY currently usable for test_small
 
-            # Prepare signal and features
-            signal = self.preprocess_signal(signal)
-            x_train = self.calculate_features(signal=signal,sample_rate=sample_rate)
+            if test_small:
+
+                if self.caching_params in cache_parameters:
+                        cache_index = cache_parameters.index(self.caching_params)
+                        x_train = cache[cache_index]
+                        print("Cache hit: {0}".format(self.caching_params))
+
+                else:
+                    # Get audio data from filepath
+                    sample_rate, signal = wavfile.read(filepath)
+                    assert sample_rate == self.sample_rate
+
+                    # Prepare signal and features
+                    signal = self.preprocess_signal(signal)
+                    x_train = self.calculate_features(signal=signal,sample_rate=sample_rate)
+
+                    cache_parameters.append(self.caching_params)
+                    cache.append(x_train)
+                    print("Added new cache entry for params: {0}".format(self.caching_params))
+
+            else:
+                # Get audio data from filepath
+                sample_rate, signal = wavfile.read(filepath)
+                assert sample_rate == self.sample_rate
+
+                # Prepare signal and features
+                signal = self.preprocess_signal(signal)
+                x_train = self.calculate_features(signal=signal,sample_rate=sample_rate)
 
             # Fit GMM and update training corpus dictionary
             gmm.fit(x_train)
@@ -364,19 +409,14 @@ def main():
     data_directory = 'profile_data/'
     test_directory = 'test_data/'
 
-    # Test parameters randomly
-    optimize_randomly = True
-
-    # Testing Flags
-    test_standard = False
-    test_all_parameters = False # This will test every parameter in the model (Warning: LONG)
-    test_files_and_gmm = False # Just tests file combinations and GMM parameters
-    test_files_and_parameters = False # This tests all file combinations and ALL parameters in the model (Warning: REALLY LONG)
-    test_files_only = True # Just tests all file combinations
-
     # Performance Flags
     animate = False
-    specify_files = False
+
+    # File override
+    specify_files = False # TODO: Add more support for this
+    classes = ['matt','ryan'] # Match up class_id and class in file_list based on position
+    file_list = []
+    n_classes = len(classes)
 
     # Enumerable parameters
     _use_emphasis = [True, False]
@@ -424,6 +464,49 @@ def main():
         best_accuracy = current_accuracy
         best_params = current_params
         #print(current_accuracy, current_params)
+
+    elif test_small:
+        parameters_list = list(product(_use_emphasis, \
+                                          _normalize_signal, \
+                                          _normalize_mfcc, \
+                                          _use_deltas, \
+                                          _trim_silence, \
+                                          _n_ccs, \
+                                          _covariance_type \
+                                          ))
+
+        for use_emphasis, \
+            normalize_signal, \
+            normalize_mfcc, \
+            use_deltas, \
+            trim_silence, \
+            n_ccs, \
+            covariance_type in parameters_list:
+            for n_components in _n_components:
+
+                current_params = ['use_emphasis: {0}'.format(use_emphasis), \
+                                  'normalize_signal: {0}'.format(normalize_signal), \
+                                  'normalize_mfcc: {0}'.format(normalize_mfcc), \
+                                  'use_deltas: {0}'.format(use_deltas), \
+                                  'trim_silence: {0}'.format(trim_silence), \
+                                  'n_ccs: {0}'.format(n_ccs), \
+                                  'covariance_type: {0}'.format(covariance_type), \
+                                  'n_components: {0}'.format(n_components)]
+
+                classifier = GMMClassifier(data_directory=data_directory, \
+                                           from_directory=True, \
+                                           use_emphasis=use_emphasis, \
+                                           normalize_signal=normalize_signal, \
+                                           normalize_mfcc=normalize_mfcc, \
+                                           use_deltas=use_deltas, \
+                                           trim_silence=trim_silence, \
+                                           n_ccs=n_ccs, \
+                                           n_components=n_components, \
+                                           covariance_type=covariance_type)
+
+                current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
+                best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
+                print(current_accuracy, current_params)
 
     elif test_all_parameters:
         # A list of all the manageable parameters
@@ -482,7 +565,6 @@ def main():
                                                                normalize_mfcc=normalize_mfcc, \
                                                                use_deltas=use_deltas, \
                                                                trim_silence=trim_silence, \
-                                                               pad_silence=pad_silence, \
                                                                n_ccs=n_ccs, \
                                                                n_components=n_components, \
                                                                covariance_type=covariance_type, \
@@ -642,9 +724,6 @@ def main():
         # Assumes optimal parameters are defaults
         if specify_files:
             classifier = GMMClassifier(from_directory=False)
-            classes = [] # Match up class_id and class in file_list based on position
-            file_list = []
-            n_classes = len(classes)
             for class_id in range(n_classes):
                 training_filenames = parse_files(file_list,class_id)
                 classifier.add_profile(label=classes[class_id],files=training_filenames)
