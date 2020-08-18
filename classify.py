@@ -12,28 +12,28 @@ from itertools import chain, combinations, product
 from time import sleep
 from random import shuffle
 
-cache = []
-cache_parameters = []
-cache_limit = 16
-
-
 # Test parameters randomly
 optimize_randomly = True
 
 # Testing Flags
-test_standard = False
-test_small = True # Just test smaller enumerable parameters, no random shuffling
+test_standard = True
+test_small = False # Just test smaller enumerable parameters, no random shuffling
 test_all_parameters = False # This will test every parameter in the model (Warning: LONG)
 test_files_and_gmm = False # Just tests file combinations and GMM parameters
 test_files_and_parameters = False # This tests all file combinations and ALL parameters in the model (Warning: REALLY LONG)
 test_files_only = False # Just tests all file combinations
+
+# Caches to speed up testing
+cache = []
+cache_parameters = []
+cache_limit = 16
 
 
 class GMMClassifier:
 
     # Optimal parameters from testing should be placed in here
     def __init__(self, data_directory='', from_directory=True, specify_files=False, files_list=[], classes=[],use_emphasis=True, normalize_signal=True, \
-    normalize_mfcc=False, use_deltas=True, trim_silence=True, \
+    normalize_mfcc=False, use_deltas=True, trim_silence=True, use_ubm=True, ubm_directory='', \
     pad_silence=False, n_ccs=13, n_components=4, covariance_type='tied',win_len=0.025, \
     win_step=0.01, frame_length=512, frame_skip=256, top_db=30):
 
@@ -63,6 +63,9 @@ class GMMClassifier:
         # GMM
         self.n_components = n_components
         self.covariance_type = covariance_type
+        self.use_ubm = use_ubm
+        self.n_ubm_components = 2048
+        self.ubm_covariance_type = 'tied'
 
         # Trimming silence
         self.frame_length = frame_length
@@ -88,11 +91,21 @@ class GMMClassifier:
                     class_training_files.append(training_path)
                 self.add_profile(label=classes[class_id],files=class_training_files)
 
+        if use_ubm:
+            assert os.path.exists(ubm_directory)
+            ubm_training_files = []
+            ubm_files = os.listdir(ubm_directory)
+            for filename in ubm_files:
+                ubm_path = os.path.join(ubm_directory,filename)
+                ubm_training_files.append(ubm_path)
+            self.add_profile(label='ubm',files=ubm_training_files)
+
         self.current_params = ['use_emphasis: {0}'.format(use_emphasis), \
                           'normalize_signal: {0}'.format(normalize_signal), \
                           'normalize_mfcc: {0}'.format(normalize_mfcc), \
                           'use_deltas: {0}'.format(use_deltas), \
                           'trim_silence: {0}'.format(trim_silence), \
+                          'use_ubm: {0}'.format(use_ubm), \
                           'n_ccs: {0}'.format(n_ccs), \
                           'covariance_type: {0}'.format(covariance_type), \
                           'n_components: {0}'.format(n_components), \
@@ -102,7 +115,6 @@ class GMMClassifier:
                           'frame_skip: {0}'.format(frame_skip), \
                           'top_db: {0}'.format(top_db)]
 
-
     def add_profile(self, label='', files=''):
 
         # Initialize training corpus dictionary
@@ -110,12 +122,17 @@ class GMMClassifier:
 
         assert len(files) > 0
 
-        gmm = GMM(n_components=self.n_components,covariance_type=self.covariance_type)
+        if label == 'ubm':
+            gmm = GMM(n_components=self.n_ubm_components,covariance_type=self.ubm_covariance_type)
+        else:
+            gmm = GMM(n_components=self.n_components,covariance_type=self.covariance_type)
 
-        if len(cache) > cache_limit: # Clear cache when too full
-            cache = []
-            cache_parameters = []
+        if test_small:
+            if len(cache) > cache_limit: # Clear cache when too full
+                cache = []
+                cache_parameters = []
 
+        feature_list = []
         for filepath in files:
             assert os.path.exists(filepath)
 
@@ -125,7 +142,7 @@ class GMMClassifier:
 
                 if self.caching_params in cache_parameters:
                         cache_index = cache_parameters.index(self.caching_params)
-                        x_train = cache[cache_index]
+                        features = cache[cache_index]
                         print("Cache hit: {0}".format(self.caching_params))
 
                 else:
@@ -135,29 +152,39 @@ class GMMClassifier:
 
                     # Prepare signal and features
                     signal = self.preprocess_signal(signal)
-                    x_train = self.calculate_features(signal=signal,sample_rate=sample_rate)
+                    features = self.calculate_features(signal=signal,sample_rate=sample_rate)
 
                     cache_parameters.append(self.caching_params)
-                    cache.append(x_train)
+                    cache.append(features)
                     print("Added new cache entry for params: {0}".format(self.caching_params))
+
 
             else:
                 # Get audio data from filepath
                 sample_rate, signal = wavfile.read(filepath)
                 assert sample_rate == self.sample_rate
 
+                print("Calculating features from {0}".format(filepath))
                 # Prepare signal and features
                 signal = self.preprocess_signal(signal)
-                x_train = self.calculate_features(signal=signal,sample_rate=sample_rate)
+                features = self.calculate_features(signal=signal,sample_rate=sample_rate)
 
-            # Fit GMM and update training corpus dictionary
-            gmm.fit(x_train)
-            self.train_corpus_dict[label] += x_train.shape[0]
+            feature_list.append(features)
+
+        x_train = np.concatenate(feature_list,axis=0)
+
+        # Fit GMM and update training corpus dictionary
+        print("Fitting GMM for {0} with {1} data points".format(label,x_train.shape[0]))
+        gmm.fit(x_train)
+        self.train_corpus_dict[label] += x_train.shape[0]
 
         # Append new trained GMM and update class metadata
-        self.speaker_profiles.append(gmm)
-        self.classes.append(label)
-        self.n_classes += 1
+        if label == 'ubm':
+            self.ubm = gmm
+        else:
+            self.speaker_profiles.append(gmm)
+            self.classes.append(label)
+            self.n_classes += 1
 
     # From: http://jamesmontgomery.us/blog/Voice_Recognition_Model.html
     def plot_mfccs(self, mfcc):
@@ -297,9 +324,16 @@ class GMMClassifier:
 
         log_likelihood = np.zeros((x_test.shape[0],self.n_classes))
 
+        if self.use_ubm:
+            ubm_llh = self.ubm.score_samples(x_test)
+
         for class_id in range(self.n_classes):
             gmm = self.speaker_profiles[class_id]
-            log_likelihood[:,class_id] = gmm.score_samples(x_test)
+            llh = gmm.score_samples(x_test)
+            if self.use_ubm:
+                log_likelihood[:,class_id] = llh/ubm_llh
+            else:
+                log_likelihood[:,class_id] = llh
 
         return log_likelihood
 
@@ -408,6 +442,7 @@ def main():
     # Data directories for training and testing
     data_directory = 'profile_data/'
     test_directory = 'test_data/'
+    ubm_directory = 'ubm_data/'
 
     # Performance Flags
     animate = False
@@ -424,6 +459,7 @@ def main():
     _normalize_mfcc = [True, False]
     _use_deltas = [True, False]
     _trim_silence = [True, False]
+    _use_ubm = [True, False]
     _n_ccs = [13, 20]
     _covariance_type = ['full','tied','diag','spherical']
 
@@ -458,7 +494,7 @@ def main():
     # Test current parameters
     if test_standard:
 
-        classifier = GMMClassifier(from_directory=True)
+        classifier = GMMClassifier(data_directory=data_directory,from_directory=True,ubm_directory=ubm_directory)
         current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
         current_params = classifier.get_params()
         best_accuracy = current_accuracy
@@ -471,6 +507,7 @@ def main():
                                           _normalize_mfcc, \
                                           _use_deltas, \
                                           _trim_silence, \
+                                          _use_ubm, \
                                           _n_ccs, \
                                           _covariance_type \
                                           ))
@@ -480,6 +517,7 @@ def main():
             normalize_mfcc, \
             use_deltas, \
             trim_silence, \
+            use_ubm, \
             n_ccs, \
             covariance_type in parameters_list:
             for n_components in _n_components:
@@ -489,6 +527,7 @@ def main():
                                   'normalize_mfcc: {0}'.format(normalize_mfcc), \
                                   'use_deltas: {0}'.format(use_deltas), \
                                   'trim_silence: {0}'.format(trim_silence), \
+                                  'use_ubm: {0}'.format(use_ubm), \
                                   'n_ccs: {0}'.format(n_ccs), \
                                   'covariance_type: {0}'.format(covariance_type), \
                                   'n_components: {0}'.format(n_components)]
@@ -500,6 +539,8 @@ def main():
                                            normalize_mfcc=normalize_mfcc, \
                                            use_deltas=use_deltas, \
                                            trim_silence=trim_silence, \
+                                           use_ubm=use_ubm, \
+                                           ubm_directory=ubm_directory, \
                                            n_ccs=n_ccs, \
                                            n_components=n_components, \
                                            covariance_type=covariance_type)
@@ -515,6 +556,7 @@ def main():
                                           _normalize_mfcc, \
                                           _use_deltas, \
                                           _trim_silence, \
+                                          _use_ubm, \
                                           _n_ccs, \
                                           _covariance_type \
                                           ))
@@ -535,6 +577,7 @@ def main():
             normalize_mfcc, \
             use_deltas, \
             trim_silence, \
+            use_ubm, \
             n_ccs, \
             covariance_type in parameters_list:
 
@@ -549,6 +592,7 @@ def main():
                                                       'normalize_mfcc: {0}'.format(normalize_mfcc), \
                                                       'use_deltas: {0}'.format(use_deltas), \
                                                       'trim_silence: {0}'.format(trim_silence), \
+                                                      'use_ubm: {0}'.format(use_ubm), \
                                                       'n_ccs: {0}'.format(n_ccs), \
                                                       'covariance_type: {0}'.format(covariance_type), \
                                                       'n_components: {0}'.format(n_components), \
@@ -565,6 +609,8 @@ def main():
                                                                normalize_mfcc=normalize_mfcc, \
                                                                use_deltas=use_deltas, \
                                                                trim_silence=trim_silence, \
+                                                               use_ubm=use_ubm, \
+                                                               ubm_directory=ubm_directory, \
                                                                n_ccs=n_ccs, \
                                                                n_components=n_components, \
                                                                covariance_type=covariance_type, \
@@ -617,7 +663,8 @@ def main():
 
                         classifier = GMMClassifier(from_directory=False, \
                                                    n_components=n_components, \
-                                                   covariance_type=covariance_type)
+                                                   covariance_type=covariance_type, \
+                                                   ubm_directory=ubm_directory)
 
                         for class_id in range(n_classes):
                             training_filenames = parse_files(file_combination_flat,class_id)
@@ -633,7 +680,7 @@ def main():
                 file_combination_flat = flatten_cartesian(file_combination)
                 current_params = file_combination_flat
 
-                classifier = GMMClassifier(from_directory=False)
+                classifier = GMMClassifier(from_directory=False,ubm_directory=ubm_directory)
 
                 for class_id in range(n_classes):
                     training_filenames = parse_files(file_combination_flat,class_id)
@@ -650,6 +697,7 @@ def main():
                                               _normalize_mfcc, \
                                               _use_deltas, \
                                               _trim_silence, \
+                                              _use_ubm, \
                                               _n_ccs, \
                                               _covariance_type \
                                               ))
@@ -670,6 +718,7 @@ def main():
                     normalize_mfcc, \
                     use_deltas, \
                     trim_silence, \
+                    use_ubm, \
                     n_ccs, \
                     covariance_type in parameters_list:
 
@@ -685,6 +734,7 @@ def main():
                                                               'normalize_mfcc: {0}'.format(normalize_mfcc), \
                                                               'use_deltas: {0}'.format(use_deltas), \
                                                               'trim_silence: {0}'.format(trim_silence), \
+                                                              'use_ubm: {0}'.format(use_ubm), \
                                                               'n_ccs: {0}'.format(n_ccs), \
                                                               'covariance_type: {0}'.format(covariance_type), \
                                                               'n_components: {0}'.format(n_components), \
@@ -700,6 +750,8 @@ def main():
                                                                        normalize_mfcc=normalize_mfcc, \
                                                                        use_deltas=use_deltas, \
                                                                        trim_silence=trim_silence, \
+                                                                       use_ubm=use_ubm, \
+                                                                       ubm_directory=ubm_directory, \
                                                                        pad_silence=pad_silence, \
                                                                        n_ccs=n_ccs, \
                                                                        n_components=n_components, \
@@ -723,13 +775,13 @@ def main():
     if animate:
         # Assumes optimal parameters are defaults
         if specify_files:
-            classifier = GMMClassifier(from_directory=False)
+            classifier = GMMClassifier(from_directory=False, ubm_directory=ubm_directory)
             for class_id in range(n_classes):
                 training_filenames = parse_files(file_list,class_id)
                 classifier.add_profile(label=classes[class_id],files=training_filenames)
 
         else:
-            classifier = GMMClassifier(data_directory=data_directory,from_directory=True)
+            classifier = GMMClassifier(data_directory=data_directory,from_directory=True, ubm_directory=ubm_directory)
 
         target_podcast = 'unknown_data/196.wav' # Not going to generalize this, make it a specific podcast
         animation_directory = 'animation_data/'
