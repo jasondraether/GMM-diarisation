@@ -9,31 +9,34 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from cv2 import VideoWriter, VideoWriter_fourcc, imread
 from itertools import chain, combinations, product
-from time import sleep
+from time import sleep, time
 from random import shuffle
 
 # Test parameters randomly
 optimize_randomly = True
 
 # Testing Flags
-test_standard = True
+test_standard = False
 test_small = False # Just test smaller enumerable parameters, no random shuffling
 test_all_parameters = False # This will test every parameter in the model (Warning: LONG)
 test_files_and_gmm = False # Just tests file combinations and GMM parameters
 test_files_and_parameters = False # This tests all file combinations and ALL parameters in the model (Warning: REALLY LONG)
 test_files_only = False # Just tests all file combinations
+test_preprocessing = True # Only test possible preprocessing steps
+n_files = 4 # Number of files to test, TOTAL (so, if 2 is put here, 1 for matt and 1 for ryan,
+# but not guaranteed to be evenly distributed, if 4 the split could be 3 and 1, but class will always have at least one file
+use_n_files = True # Whether or not to apply the n_files check
 
 # Caches to speed up testing
 cache = []
 cache_parameters = []
 cache_limit = 16
 
-
 class GMMClassifier:
 
     # Optimal parameters from testing should be placed in here
     def __init__(self, data_directory='', from_directory=True, specify_files=False, files_list=[], classes=[],use_emphasis=True, normalize_signal=True, \
-    normalize_mfcc=False, use_deltas=True, trim_silence=True, use_ubm=True, ubm_directory='', \
+    normalize_mfcc=False, use_deltas=True, trim_silence=True, use_ubm=False, ubm_directory='', \
     pad_silence=False, n_ccs=13, n_components=4, covariance_type='tied',win_len=0.025, \
     win_step=0.01, frame_length=512, frame_skip=256, top_db=30):
 
@@ -66,6 +69,7 @@ class GMMClassifier:
         self.use_ubm = use_ubm
         self.n_ubm_components = 2048
         self.ubm_covariance_type = 'tied'
+        self.decision_threshold = 0 # Adding this in to be used with ubm eventually
 
         # Trimming silence
         self.frame_length = frame_length
@@ -138,7 +142,7 @@ class GMMClassifier:
 
             self.caching_params = [self.use_emphasis,self.normalize_signal,self.normalize_mfcc,self.use_deltas,self.trim_silence,self.n_ccs,filepath] # ONLY currently usable for test_small
 
-            if test_small:
+            if test_small or test_files_only:
 
                 if self.caching_params in cache_parameters:
                         cache_index = cache_parameters.index(self.caching_params)
@@ -164,7 +168,7 @@ class GMMClassifier:
                 sample_rate, signal = wavfile.read(filepath)
                 assert sample_rate == self.sample_rate
 
-                print("Calculating features from {0}".format(filepath))
+                #print("Calculating features from {0}".format(filepath))
                 # Prepare signal and features
                 signal = self.preprocess_signal(signal)
                 features = self.calculate_features(signal=signal,sample_rate=sample_rate)
@@ -363,9 +367,11 @@ class GMMClassifier:
             n_data = llh.shape[0]
             assert n_data > 0
 
-            for l in llh:
-                prediction = np.argmax(l)
-                if self.classes[prediction] == test[1]:
+            predictions = np.argmax(llh,axis=1)
+
+            # Definitely a way to optimize this but this is python
+            for p in predictions:
+                if self.classes[p] == test[1]:
                     n_correct += 1
 
             test_corpus_dict[test[1]] += n_data
@@ -439,6 +445,8 @@ def keep_best(best_accuracy,best_params,current_accuracy,current_params):
 
 def main():
 
+    # TODO: Make this smaller and make it easier to test params without explicitly listing them!!!
+
     # Data directories for training and testing
     data_directory = 'profile_data/'
     test_directory = 'test_data/'
@@ -448,7 +456,7 @@ def main():
     animate = False
 
     # File override
-    specify_files = False # TODO: Add more support for this
+    specify_files = False # TODO: Add more support for this in the class structure itself
     classes = ['matt','ryan'] # Match up class_id and class in file_list based on position
     file_list = []
     n_classes = len(classes)
@@ -494,12 +502,53 @@ def main():
     # Test current parameters
     if test_standard:
 
+        s = time()
         classifier = GMMClassifier(data_directory=data_directory,from_directory=True,ubm_directory=ubm_directory)
+        e = time()
+        print("Training time in test_standard: {0}".format(e-s))
+        s = time()
         current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
+        e = time()
+        print("Evaluation time in test_standard: {0}".format(e-s))
         current_params = classifier.get_params()
         best_accuracy = current_accuracy
         best_params = current_params
         #print(current_accuracy, current_params)
+
+    elif test_preprocessing: # TODO: Include n_ccs in this?
+        parameters_list = list(product(_use_emphasis, \
+                                          _normalize_signal, \
+                                          _normalize_mfcc, \
+                                          _use_deltas, \
+                                          _trim_silence, \
+                                          _n_ccs \
+                                          ))
+        for use_emphasis, \
+            normalize_signal, \
+            normalize_mfcc, \
+            use_deltas, \
+            trim_silence, \
+            n_ccs in parameters_list:
+
+            current_params = ['use_emphasis: {0}'.format(use_emphasis), \
+                              'normalize_signal: {0}'.format(normalize_signal), \
+                              'normalize_mfcc: {0}'.format(normalize_mfcc), \
+                              'use_deltas: {0}'.format(use_deltas), \
+                              'trim_silence: {0}'.format(trim_silence), \
+                              'n_ccs: {0}'.format(n_ccs)]
+
+            classifier = GMMClassifier(data_directory=data_directory, \
+                                       from_directory=True, \
+                                       use_emphasis=use_emphasis, \
+                                       normalize_signal=normalize_signal, \
+                                       normalize_mfcc=normalize_mfcc, \
+                                       use_deltas=use_deltas, \
+                                       trim_silence=trim_silence, \
+                                       n_ccs=n_ccs)
+
+            current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
+            best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
+            print(current_accuracy, current_params)
 
     elif test_small:
         parameters_list = list(product(_use_emphasis, \
@@ -655,6 +704,8 @@ def main():
 
             for file_combination in powerset_product:
                 file_combination_flat = flatten_cartesian(file_combination)
+                if use_n_files and len(file_combination_flat) > n_files: # If TOTAL number of files (i.e., across all classes) exceeds n_files
+                    continue
                 for n_components in _n_components:
                     for covariance_type in _covariance_type:
                         current_params = ['file_combination: {0}'.format(file_combination_flat), \
@@ -678,6 +729,8 @@ def main():
 
             for file_combination in powerset_product:
                 file_combination_flat = flatten_cartesian(file_combination)
+                if use_n_files and len(file_combination_flat) != n_files:
+                    continue
                 current_params = file_combination_flat
 
                 classifier = GMMClassifier(from_directory=False,ubm_directory=ubm_directory)
@@ -713,6 +766,8 @@ def main():
 
             for file_combination in powerset_product:
                 file_combination_flat = flatten_cartesian(file_combination)
+                if use_n_files and len(file_combination_flat) > n_files:
+                    continue
                 for use_emphasis, \
                     normalize_signal, \
                     normalize_mfcc, \
