@@ -13,7 +13,7 @@ from time import sleep, time
 from random import shuffle
 
 # Test parameters randomly
-optimize_randomly = True
+optimize_randomly = False
 
 # Testing Flags
 test_standard = False
@@ -21,8 +21,8 @@ test_small = False # Just test smaller enumerable parameters, no random shufflin
 test_all_parameters = False # This will test every parameter in the model (Warning: LONG)
 test_files_and_gmm = False # Just tests file combinations and GMM parameters
 test_files_and_parameters = False # This tests all file combinations and ALL parameters in the model (Warning: REALLY LONG)
-test_files_only = False # Just tests all file combinations
-test_preprocessing = True # Only test possible preprocessing steps
+test_files_only = True # Just tests all file combinations
+test_preprocessing = False # Only test possible preprocessing steps
 n_files = 4 # Number of files to test, TOTAL (so, if 2 is put here, 1 for matt and 1 for ryan,
 # but not guaranteed to be evenly distributed, if 4 the split could be 3 and 1, but class will always have at least one file
 use_n_files = True # Whether or not to apply the n_files check
@@ -121,6 +121,11 @@ class GMMClassifier:
 
     def add_profile(self, label='', files=''):
 
+        # So we can use this globally
+        global cache
+        global cache_limit
+        global cache_parameters
+
         # Initialize training corpus dictionary
         self.train_corpus_dict[label] = 0
 
@@ -131,7 +136,7 @@ class GMMClassifier:
         else:
             gmm = GMM(n_components=self.n_components,covariance_type=self.covariance_type)
 
-        if test_small:
+        if test_small or test_files_only or test_files_and_gmm:
             if len(cache) > cache_limit: # Clear cache when too full
                 cache = []
                 cache_parameters = []
@@ -142,12 +147,12 @@ class GMMClassifier:
 
             self.caching_params = [self.use_emphasis,self.normalize_signal,self.normalize_mfcc,self.use_deltas,self.trim_silence,self.n_ccs,filepath] # ONLY currently usable for test_small
 
-            if test_small or test_files_only:
+            if test_small or test_files_only or test_files_and_gmm:
 
                 if self.caching_params in cache_parameters:
                         cache_index = cache_parameters.index(self.caching_params)
                         features = cache[cache_index]
-                        print("Cache hit: {0}".format(self.caching_params))
+                        #print("Cache hit: {0}".format(self.caching_params))
 
                 else:
                     # Get audio data from filepath
@@ -160,7 +165,7 @@ class GMMClassifier:
 
                     cache_parameters.append(self.caching_params)
                     cache.append(features)
-                    print("Added new cache entry for params: {0}".format(self.caching_params))
+                    #print("Added new cache entry for params: {0}".format(self.caching_params))
 
 
             else:
@@ -178,7 +183,7 @@ class GMMClassifier:
         x_train = np.concatenate(feature_list,axis=0)
 
         # Fit GMM and update training corpus dictionary
-        print("Fitting GMM for {0} with {1} data points".format(label,x_train.shape[0]))
+        #print("Fitting GMM for {0} with {1} data points".format(label,x_train.shape[0]))
         gmm.fit(x_train)
         self.train_corpus_dict[label] += x_train.shape[0]
 
@@ -704,7 +709,7 @@ def main():
 
             for file_combination in powerset_product:
                 file_combination_flat = flatten_cartesian(file_combination)
-                if use_n_files and len(file_combination_flat) > n_files: # If TOTAL number of files (i.e., across all classes) exceeds n_files
+                if use_n_files and len(file_combination_flat) == n_files: # If TOTAL number of files (i.e., across all classes) exceeds n_files
                     continue
                 for n_components in _n_components:
                     for covariance_type in _covariance_type:
@@ -723,7 +728,7 @@ def main():
 
                         current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
                         best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
-                        #print(current_accuracy, current_params)
+                        print(current_accuracy, current_params)
 
         elif test_files_only:
 
