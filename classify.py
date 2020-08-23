@@ -13,19 +13,19 @@ from time import sleep, time
 from random import shuffle
 
 # Test parameters randomly
-optimize_randomly = False
+optimize_randomly = True
 
 # Testing Flags
 test_standard = False
 test_small = False # Just test smaller enumerable parameters, no random shuffling
 test_all_parameters = False # This will test every parameter in the model (Warning: LONG)
-test_files_and_gmm = False # Just tests file combinations and GMM parameters
+test_files_and_gmm = True # Just tests file combinations and GMM parameters
 test_files_and_parameters = False # This tests all file combinations and ALL parameters in the model (Warning: REALLY LONG)
-test_files_only = True # Just tests all file combinations
+test_files_only = False # Just tests all file combinations
 test_preprocessing = False # Only test possible preprocessing steps
-n_files = 4 # Number of files to test, TOTAL (so, if 2 is put here, 1 for matt and 1 for ryan,
+n_files = 6 # Number of files to test, TOTAL (so, if 2 is put here, 1 for matt and 1 for ryan,
 # but not guaranteed to be evenly distributed, if 4 the split could be 3 and 1, but class will always have at least one file
-use_n_files = True # Whether or not to apply the n_files check
+use_n_files = False # Whether or not to apply the n_files check
 
 # Caches to speed up testing
 cache = []
@@ -443,7 +443,8 @@ def parse_files(file_list, class_id):
 
 def keep_best(best_accuracy,best_params,current_accuracy,current_params):
     if current_accuracy > best_accuracy:
-        print("New best:",current_accuracy,current_params)
+        print("\nNew best:",current_accuracy,current_params)
+        print("")
         return current_accuracy, current_params
     else:
         return best_accuracy, best_params
@@ -474,11 +475,11 @@ def main():
     _trim_silence = [True, False]
     _use_ubm = [True, False]
     _n_ccs = [13, 20]
-    _covariance_type = ['full','tied','diag','spherical']
+    _covariance_type = ['tied']
 
     # Parameters boundaries
     min_components = 1
-    max_components = 32
+    max_components = 30
     win_len_coeff = 0.005
     min_win_len = int(0.01/win_len_coeff)
     max_win_len = int(0.05/win_len_coeff)
@@ -504,87 +505,49 @@ def main():
     best_accuracy = 0.0
     best_params = []
 
-    # Test current parameters
-    if test_standard:
+    log_file = 'log.txt'
 
-        s = time()
-        classifier = GMMClassifier(data_directory=data_directory,from_directory=True,ubm_directory=ubm_directory)
-        e = time()
-        print("Training time in test_standard: {0}".format(e-s))
-        s = time()
-        current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
-        e = time()
-        print("Evaluation time in test_standard: {0}".format(e-s))
-        current_params = classifier.get_params()
-        best_accuracy = current_accuracy
-        best_params = current_params
-        #print(current_accuracy, current_params)
+    with open(log_file,'w') as out:
 
-    elif test_preprocessing: # TODO: Include n_ccs in this?
-        parameters_list = list(product(_use_emphasis, \
-                                          _normalize_signal, \
-                                          _normalize_mfcc, \
-                                          _use_deltas, \
-                                          _trim_silence, \
-                                          _n_ccs \
-                                          ))
-        for use_emphasis, \
-            normalize_signal, \
-            normalize_mfcc, \
-            use_deltas, \
-            trim_silence, \
-            n_ccs in parameters_list:
+        # Test current parameters
+        if test_standard:
 
-            current_params = ['use_emphasis: {0}'.format(use_emphasis), \
-                              'normalize_signal: {0}'.format(normalize_signal), \
-                              'normalize_mfcc: {0}'.format(normalize_mfcc), \
-                              'use_deltas: {0}'.format(use_deltas), \
-                              'trim_silence: {0}'.format(trim_silence), \
-                              'n_ccs: {0}'.format(n_ccs)]
-
-            classifier = GMMClassifier(data_directory=data_directory, \
-                                       from_directory=True, \
-                                       use_emphasis=use_emphasis, \
-                                       normalize_signal=normalize_signal, \
-                                       normalize_mfcc=normalize_mfcc, \
-                                       use_deltas=use_deltas, \
-                                       trim_silence=trim_silence, \
-                                       n_ccs=n_ccs)
-
+            s = time()
+            classifier = GMMClassifier(data_directory=data_directory,from_directory=True,ubm_directory=ubm_directory)
+            e = time()
+            print("Training time in test_standard: {0}".format(e-s))
+            s = time()
             current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
-            best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
-            print(current_accuracy, current_params)
+            e = time()
+            print("Evaluation time in test_standard: {0}".format(e-s))
+            current_params = classifier.get_params()
+            best_accuracy = current_accuracy
+            best_params = current_params
+            train_corpus_dict = classifier.get_train_corpus_dict()
+            out.write(str(current_accuracy)+str(current_params)+str(train_corpus_dict)+'\n')
+            #print(current_accuracy, current_params)
 
-    elif test_small:
-        parameters_list = list(product(_use_emphasis, \
-                                          _normalize_signal, \
-                                          _normalize_mfcc, \
-                                          _use_deltas, \
-                                          _trim_silence, \
-                                          _use_ubm, \
-                                          _n_ccs, \
-                                          _covariance_type \
-                                          ))
-
-        for use_emphasis, \
-            normalize_signal, \
-            normalize_mfcc, \
-            use_deltas, \
-            trim_silence, \
-            use_ubm, \
-            n_ccs, \
-            covariance_type in parameters_list:
-            for n_components in _n_components:
+        elif test_preprocessing: # TODO: Include n_ccs in this?
+            parameters_list = list(product(_use_emphasis, \
+                                              _normalize_signal, \
+                                              _normalize_mfcc, \
+                                              _use_deltas, \
+                                              _trim_silence, \
+                                              _n_ccs \
+                                              ))
+            for use_emphasis, \
+                normalize_signal, \
+                normalize_mfcc, \
+                use_deltas, \
+                trim_silence, \
+                n_ccs in parameters_list:
 
                 current_params = ['use_emphasis: {0}'.format(use_emphasis), \
                                   'normalize_signal: {0}'.format(normalize_signal), \
                                   'normalize_mfcc: {0}'.format(normalize_mfcc), \
                                   'use_deltas: {0}'.format(use_deltas), \
                                   'trim_silence: {0}'.format(trim_silence), \
-                                  'use_ubm: {0}'.format(use_ubm), \
-                                  'n_ccs: {0}'.format(n_ccs), \
-                                  'covariance_type: {0}'.format(covariance_type), \
-                                  'n_components: {0}'.format(n_components)]
+                                  'n_ccs: {0}'.format(n_ccs)]
 
                 classifier = GMMClassifier(data_directory=data_directory, \
                                            from_directory=True, \
@@ -593,162 +556,66 @@ def main():
                                            normalize_mfcc=normalize_mfcc, \
                                            use_deltas=use_deltas, \
                                            trim_silence=trim_silence, \
-                                           use_ubm=use_ubm, \
-                                           ubm_directory=ubm_directory, \
-                                           n_ccs=n_ccs, \
-                                           n_components=n_components, \
-                                           covariance_type=covariance_type)
+                                           n_ccs=n_ccs)
 
                 current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
                 best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
+                train_corpus_dict = classifier.get_train_corpus_dict()
+                out.write(str(current_accuracy)+str(current_params)+str(train_corpus_dict)+'\n')
                 print(current_accuracy, current_params)
 
-    elif test_all_parameters:
-        # A list of all the manageable parameters
-        parameters_list = list(product(_use_emphasis, \
-                                          _normalize_signal, \
-                                          _normalize_mfcc, \
-                                          _use_deltas, \
-                                          _trim_silence, \
-                                          _use_ubm, \
-                                          _n_ccs, \
-                                          _covariance_type \
-                                          ))
+        elif test_small:
+            parameters_list = list(product(_use_emphasis, \
+                                              _normalize_signal, \
+                                              _normalize_mfcc, \
+                                              _use_deltas, \
+                                              _trim_silence, \
+                                              _use_ubm, \
+                                              _n_ccs, \
+                                              _covariance_type \
+                                              ))
 
-
-        if optimize_randomly:
-            shuffle(parameters_list)
-            shuffle(_n_components)
-            shuffle(_win_len)
-            shuffle(_win_step)
-            shuffle(_frame_length)
-            shuffle(_frame_skip)
-            shuffle(_top_db)
-
-        # Tune all hyperparameters
-        for use_emphasis, \
-            normalize_signal, \
-            normalize_mfcc, \
-            use_deltas, \
-            trim_silence, \
-            use_ubm, \
-            n_ccs, \
-            covariance_type in parameters_list:
-
-            for n_components in _n_components:
-                for win_len in _win_len:
-                    for win_step in _win_step:
-                        for frame_length in _frame_length:
-                            for frame_skip in _frame_skip:
-                                for top_db in _top_db:
-                                    current_params = ['use_emphasis: {0}'.format(use_emphasis), \
-                                                      'normalize_signal: {0}'.format(normalize_signal), \
-                                                      'normalize_mfcc: {0}'.format(normalize_mfcc), \
-                                                      'use_deltas: {0}'.format(use_deltas), \
-                                                      'trim_silence: {0}'.format(trim_silence), \
-                                                      'use_ubm: {0}'.format(use_ubm), \
-                                                      'n_ccs: {0}'.format(n_ccs), \
-                                                      'covariance_type: {0}'.format(covariance_type), \
-                                                      'n_components: {0}'.format(n_components), \
-                                                      'win_len: {0}'.format(win_len), \
-                                                      'win_step: {0}'.format(win_step), \
-                                                      'frame_length: {0}'.format(frame_length), \
-                                                      'frame_skip: {0}'.format(frame_skip), \
-                                                      'top_db: {0}'.format(top_db)]
-
-                                    classifier = GMMClassifier(data_directory=data_directory, \
-                                                               from_directory=True, \
-                                                               use_emphasis=use_emphasis, \
-                                                               normalize_signal=normalize_signal, \
-                                                               normalize_mfcc=normalize_mfcc, \
-                                                               use_deltas=use_deltas, \
-                                                               trim_silence=trim_silence, \
-                                                               use_ubm=use_ubm, \
-                                                               ubm_directory=ubm_directory, \
-                                                               n_ccs=n_ccs, \
-                                                               n_components=n_components, \
-                                                               covariance_type=covariance_type, \
-                                                               win_len=win_len, \
-                                                               win_step=win_step, \
-                                                               frame_length=frame_length, \
-                                                               frame_skip=frame_skip, \
-                                                               top_db=top_db)
-
-                                    current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
-                                    best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
-                                    #print(current_accuracy, current_params)
-    else:
-        # Generate file combinations (this kind of overrides the stuff
-        # that the class does, but it's mainly for optimization)
-
-        file_powersets = []
-        assert os.path.exists(data_directory)
-        classes = os.listdir(data_directory)
-        n_classes = len(classes)
-        for class_id in range(n_classes):
-            training_filenames = []
-            class_directory = os.path.join(data_directory,classes[class_id])
-            class_files = os.listdir(class_directory)
-            for class_file in class_files:
-                filepath = os.path.join(class_directory,class_file)
-                training_filenames.append([filepath, class_id])
-
-            training_powerset = powerset(training_filenames)
-            file_powersets.append(training_powerset)
-
-        powerset_product = cartesian_product(file_powersets)
-
-        if optimize_randomly:
-            shuffle(powerset_product)
-
-        if test_files_and_gmm:
-
-            if optimize_randomly:
-                shuffle(_n_components)
-                shuffle(_covariance_type)
-
-            for file_combination in powerset_product:
-                file_combination_flat = flatten_cartesian(file_combination)
-                if use_n_files and len(file_combination_flat) == n_files: # If TOTAL number of files (i.e., across all classes) exceeds n_files
-                    continue
+            for use_emphasis, \
+                normalize_signal, \
+                normalize_mfcc, \
+                use_deltas, \
+                trim_silence, \
+                use_ubm, \
+                n_ccs, \
+                covariance_type in parameters_list:
                 for n_components in _n_components:
-                    for covariance_type in _covariance_type:
-                        current_params = ['file_combination: {0}'.format(file_combination_flat), \
-                                          'n_components: {0}'.format(n_components), \
-                                          'covariance_type: {0}'.format(covariance_type)]
 
-                        classifier = GMMClassifier(from_directory=False, \
-                                                   n_components=n_components, \
-                                                   covariance_type=covariance_type, \
-                                                   ubm_directory=ubm_directory)
+                    current_params = ['use_emphasis: {0}'.format(use_emphasis), \
+                                      'normalize_signal: {0}'.format(normalize_signal), \
+                                      'normalize_mfcc: {0}'.format(normalize_mfcc), \
+                                      'use_deltas: {0}'.format(use_deltas), \
+                                      'trim_silence: {0}'.format(trim_silence), \
+                                      'use_ubm: {0}'.format(use_ubm), \
+                                      'n_ccs: {0}'.format(n_ccs), \
+                                      'covariance_type: {0}'.format(covariance_type), \
+                                      'n_components: {0}'.format(n_components)]
 
-                        for class_id in range(n_classes):
-                            training_filenames = parse_files(file_combination_flat,class_id)
-                            classifier.add_profile(label=classes[class_id],files=training_filenames)
+                    classifier = GMMClassifier(data_directory=data_directory, \
+                                               from_directory=True, \
+                                               use_emphasis=use_emphasis, \
+                                               normalize_signal=normalize_signal, \
+                                               normalize_mfcc=normalize_mfcc, \
+                                               use_deltas=use_deltas, \
+                                               trim_silence=trim_silence, \
+                                               use_ubm=use_ubm, \
+                                               ubm_directory=ubm_directory, \
+                                               n_ccs=n_ccs, \
+                                               n_components=n_components, \
+                                               covariance_type=covariance_type)
 
-                        current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
-                        best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
-                        print(current_accuracy, current_params)
+                    current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
+                    best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
 
-        elif test_files_only:
+                    train_corpus_dict = classifier.get_train_corpus_dict()
+                    out.write(str(current_accuracy)+str(current_params)+str(train_corpus_dict)+'\n')
+                    print(current_accuracy, current_params)
 
-            for file_combination in powerset_product:
-                file_combination_flat = flatten_cartesian(file_combination)
-                if use_n_files and len(file_combination_flat) != n_files:
-                    continue
-                current_params = file_combination_flat
-
-                classifier = GMMClassifier(from_directory=False,ubm_directory=ubm_directory)
-
-                for class_id in range(n_classes):
-                    training_filenames = parse_files(file_combination_flat,class_id)
-                    classifier.add_profile(label=classes[class_id],files=training_filenames)
-
-                current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
-                best_accuracy, best_params = keep_best(best_accuracy, best_params, current_accuracy, current_params)
-                print(current_accuracy, current_params)
-
-        elif test_files_and_parameters: # The big test
+        elif test_all_parameters:
             # A list of all the manageable parameters
             parameters_list = list(product(_use_emphasis, \
                                               _normalize_signal, \
@@ -760,6 +627,7 @@ def main():
                                               _covariance_type \
                                               ))
 
+
             if optimize_randomly:
                 shuffle(parameters_list)
                 shuffle(_n_components)
@@ -769,66 +637,223 @@ def main():
                 shuffle(_frame_skip)
                 shuffle(_top_db)
 
-            for file_combination in powerset_product:
-                file_combination_flat = flatten_cartesian(file_combination)
-                if use_n_files and len(file_combination_flat) > n_files:
-                    continue
-                for use_emphasis, \
-                    normalize_signal, \
-                    normalize_mfcc, \
-                    use_deltas, \
-                    trim_silence, \
-                    use_ubm, \
-                    n_ccs, \
-                    covariance_type in parameters_list:
+            # Tune all hyperparameters
+            for use_emphasis, \
+                normalize_signal, \
+                normalize_mfcc, \
+                use_deltas, \
+                trim_silence, \
+                use_ubm, \
+                n_ccs, \
+                covariance_type in parameters_list:
 
+                for n_components in _n_components:
+                    for win_len in _win_len:
+                        for win_step in _win_step:
+                            for frame_length in _frame_length:
+                                for frame_skip in _frame_skip:
+                                    for top_db in _top_db:
+                                        current_params = ['use_emphasis: {0}'.format(use_emphasis), \
+                                                          'normalize_signal: {0}'.format(normalize_signal), \
+                                                          'normalize_mfcc: {0}'.format(normalize_mfcc), \
+                                                          'use_deltas: {0}'.format(use_deltas), \
+                                                          'trim_silence: {0}'.format(trim_silence), \
+                                                          'use_ubm: {0}'.format(use_ubm), \
+                                                          'n_ccs: {0}'.format(n_ccs), \
+                                                          'covariance_type: {0}'.format(covariance_type), \
+                                                          'n_components: {0}'.format(n_components), \
+                                                          'win_len: {0}'.format(win_len), \
+                                                          'win_step: {0}'.format(win_step), \
+                                                          'frame_length: {0}'.format(frame_length), \
+                                                          'frame_skip: {0}'.format(frame_skip), \
+                                                          'top_db: {0}'.format(top_db)]
+
+                                        classifier = GMMClassifier(data_directory=data_directory, \
+                                                                   from_directory=True, \
+                                                                   use_emphasis=use_emphasis, \
+                                                                   normalize_signal=normalize_signal, \
+                                                                   normalize_mfcc=normalize_mfcc, \
+                                                                   use_deltas=use_deltas, \
+                                                                   trim_silence=trim_silence, \
+                                                                   use_ubm=use_ubm, \
+                                                                   ubm_directory=ubm_directory, \
+                                                                   n_ccs=n_ccs, \
+                                                                   n_components=n_components, \
+                                                                   covariance_type=covariance_type, \
+                                                                   win_len=win_len, \
+                                                                   win_step=win_step, \
+                                                                   frame_length=frame_length, \
+                                                                   frame_skip=frame_skip, \
+                                                                   top_db=top_db)
+
+                                        current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
+                                        best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
+
+                                        train_corpus_dict = classifier.get_train_corpus_dict()
+                                        out.write(str(current_accuracy)+str(current_params)+str(train_corpus_dict)+'\n')
+                                        #print(current_accuracy, current_params)
+        else:
+            # Generate file combinations (this kind of overrides the stuff
+            # that the class does, but it's mainly for optimization)
+
+            file_powersets = []
+            assert os.path.exists(data_directory)
+            classes = os.listdir(data_directory)
+            n_classes = len(classes)
+            for class_id in range(n_classes):
+                training_filenames = []
+                class_directory = os.path.join(data_directory,classes[class_id])
+                class_files = os.listdir(class_directory)
+                for class_file in class_files:
+                    filepath = os.path.join(class_directory,class_file)
+                    training_filenames.append([filepath, class_id])
+
+                training_powerset = powerset(training_filenames)
+                file_powersets.append(training_powerset)
+
+            powerset_product = cartesian_product(file_powersets)
+
+            if optimize_randomly:
+                shuffle(powerset_product)
+
+            if test_files_and_gmm:
+
+                # if optimize_randomly:
+                #     # Don't need to do this really
+                #     #shuffle(_n_components)
+                #     #shuffle(_covariance_type)
+
+                for file_combination in powerset_product:
+                    file_combination_flat = flatten_cartesian(file_combination)
+                    if use_n_files and len(file_combination_flat) != n_files: # If TOTAL number of files (i.e., across all classes) exceeds n_files
+                        continue
                     for n_components in _n_components:
-                        for win_len in _win_len:
-                            for win_step in _win_step:
-                                for frame_length in _frame_length:
-                                    for frame_skip in _frame_skip:
-                                        for top_db in _top_db:
-                                            current_params = ['file_combination: {0}'.format(file_combination_flat), \
-                                                              'use_emphasis: {0}'.format(use_emphasis), \
-                                                              'normalize_signal: {0}'.format(normalize_signal), \
-                                                              'normalize_mfcc: {0}'.format(normalize_mfcc), \
-                                                              'use_deltas: {0}'.format(use_deltas), \
-                                                              'trim_silence: {0}'.format(trim_silence), \
-                                                              'use_ubm: {0}'.format(use_ubm), \
-                                                              'n_ccs: {0}'.format(n_ccs), \
-                                                              'covariance_type: {0}'.format(covariance_type), \
-                                                              'n_components: {0}'.format(n_components), \
-                                                              'win_len: {0}'.format(win_len), \
-                                                              'win_step: {0}'.format(win_step), \
-                                                              'frame_length: {0}'.format(frame_length), \
-                                                              'frame_skip: {0}'.format(frame_skip), \
-                                                              'top_db: {0}'.format(top_db)]
+                        for covariance_type in _covariance_type:
+                            current_params = ['file_combination: {0}'.format(file_combination_flat), \
+                                              'n_components: {0}'.format(n_components), \
+                                              'covariance_type: {0}'.format(covariance_type)]
 
-                                            classifier = GMMClassifier(from_directory=False, \
-                                                                       use_emphasis=use_emphasis, \
-                                                                       normalize_signal=normalize_signal, \
-                                                                       normalize_mfcc=normalize_mfcc, \
-                                                                       use_deltas=use_deltas, \
-                                                                       trim_silence=trim_silence, \
-                                                                       use_ubm=use_ubm, \
-                                                                       ubm_directory=ubm_directory, \
-                                                                       pad_silence=pad_silence, \
-                                                                       n_ccs=n_ccs, \
-                                                                       n_components=n_components, \
-                                                                       covariance_type=covariance_type, \
-                                                                       win_len=win_len, \
-                                                                       win_step=win_step, \
-                                                                       frame_length=frame_length, \
-                                                                       frame_skip=frame_skip, \
-                                                                       top_db=top_db)
+                            classifier = GMMClassifier(from_directory=False, \
+                                                       n_components=n_components, \
+                                                       covariance_type=covariance_type, \
+                                                       ubm_directory=ubm_directory)
 
-                                            for class_id in range(n_classes):
-                                                training_filenames = parse_files(file_combination_flat,class_id)
-                                                classifier.add_profile(label=classes[class_id],files=training_filenames)
+                            for class_id in range(n_classes):
+                                training_filenames = parse_files(file_combination_flat,class_id)
+                                classifier.add_profile(label=classes[class_id],files=training_filenames)
 
-                                            current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
-                                            best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
-                                            #print(current_accuracy, current_params)
+                            current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
+                            best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
+
+                            train_corpus_dict = classifier.get_train_corpus_dict()
+                            out.write(str(current_accuracy)+str(current_params)+str(train_corpus_dict)+'\n')
+                            print(current_accuracy, current_params)
+
+            elif test_files_only:
+
+                for file_combination in powerset_product:
+                    file_combination_flat = flatten_cartesian(file_combination)
+                    if use_n_files and len(file_combination_flat) != n_files:
+                        continue
+                    current_params = file_combination_flat
+
+                    classifier = GMMClassifier(from_directory=False,ubm_directory=ubm_directory)
+
+                    for class_id in range(n_classes):
+                        training_filenames = parse_files(file_combination_flat,class_id)
+                        classifier.add_profile(label=classes[class_id],files=training_filenames)
+
+                    current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
+                    best_accuracy, best_params = keep_best(best_accuracy, best_params, current_accuracy, current_params)
+
+                    train_corpus_dict = classifier.get_train_corpus_dict()
+                    out.write(str(current_accuracy)+str(current_params)+str(train_corpus_dict)+'\n')
+                    print(current_accuracy, current_params)
+
+            elif test_files_and_parameters: # The big test
+                # A list of all the manageable parameters
+                parameters_list = list(product(_use_emphasis, \
+                                                  _normalize_signal, \
+                                                  _normalize_mfcc, \
+                                                  _use_deltas, \
+                                                  _trim_silence, \
+                                                  _use_ubm, \
+                                                  _n_ccs, \
+                                                  _covariance_type \
+                                                  ))
+
+                if optimize_randomly:
+                    shuffle(parameters_list)
+                    shuffle(_n_components)
+                    shuffle(_win_len)
+                    shuffle(_win_step)
+                    shuffle(_frame_length)
+                    shuffle(_frame_skip)
+                    shuffle(_top_db)
+
+                for file_combination in powerset_product:
+                    file_combination_flat = flatten_cartesian(file_combination)
+                    if use_n_files and len(file_combination_flat) > n_files:
+                        continue
+                    for use_emphasis, \
+                        normalize_signal, \
+                        normalize_mfcc, \
+                        use_deltas, \
+                        trim_silence, \
+                        use_ubm, \
+                        n_ccs, \
+                        covariance_type in parameters_list:
+
+                        for n_components in _n_components:
+                            for win_len in _win_len:
+                                for win_step in _win_step:
+                                    for frame_length in _frame_length:
+                                        for frame_skip in _frame_skip:
+                                            for top_db in _top_db:
+                                                current_params = ['file_combination: {0}'.format(file_combination_flat), \
+                                                                  'use_emphasis: {0}'.format(use_emphasis), \
+                                                                  'normalize_signal: {0}'.format(normalize_signal), \
+                                                                  'normalize_mfcc: {0}'.format(normalize_mfcc), \
+                                                                  'use_deltas: {0}'.format(use_deltas), \
+                                                                  'trim_silence: {0}'.format(trim_silence), \
+                                                                  'use_ubm: {0}'.format(use_ubm), \
+                                                                  'n_ccs: {0}'.format(n_ccs), \
+                                                                  'covariance_type: {0}'.format(covariance_type), \
+                                                                  'n_components: {0}'.format(n_components), \
+                                                                  'win_len: {0}'.format(win_len), \
+                                                                  'win_step: {0}'.format(win_step), \
+                                                                  'frame_length: {0}'.format(frame_length), \
+                                                                  'frame_skip: {0}'.format(frame_skip), \
+                                                                  'top_db: {0}'.format(top_db)]
+
+                                                classifier = GMMClassifier(from_directory=False, \
+                                                                           use_emphasis=use_emphasis, \
+                                                                           normalize_signal=normalize_signal, \
+                                                                           normalize_mfcc=normalize_mfcc, \
+                                                                           use_deltas=use_deltas, \
+                                                                           trim_silence=trim_silence, \
+                                                                           use_ubm=use_ubm, \
+                                                                           ubm_directory=ubm_directory, \
+                                                                           pad_silence=pad_silence, \
+                                                                           n_ccs=n_ccs, \
+                                                                           n_components=n_components, \
+                                                                           covariance_type=covariance_type, \
+                                                                           win_len=win_len, \
+                                                                           win_step=win_step, \
+                                                                           frame_length=frame_length, \
+                                                                           frame_skip=frame_skip, \
+                                                                           top_db=top_db)
+
+                                                for class_id in range(n_classes):
+                                                    training_filenames = parse_files(file_combination_flat,class_id)
+                                                    classifier.add_profile(label=classes[class_id],files=training_filenames)
+
+                                                current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
+                                                best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
+
+                                                train_corpus_dict = classifier.get_train_corpus_dict()
+                                                out.write(str(current_accuracy)+str(current_params)+str(train_corpus_dict)+'\n')
+                                                #print(current_accuracy, current_params)
 
     print("Best accuracy: {0} \nBest parameters {1}:".format(best_accuracy,best_params))
 
