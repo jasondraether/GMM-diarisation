@@ -18,6 +18,7 @@ optimize_randomly = True
 # Testing Flags
 test_standard = False
 test_small = False # Just test smaller enumerable parameters, no random shuffling
+test_gmm = True # Test GMM params
 test_all_parameters = False # This will test every parameter in the model (Warning: LONG)
 test_files_and_gmm = True # Just tests file combinations and GMM parameters
 test_files_and_parameters = False # This tests all file combinations and ALL parameters in the model (Warning: REALLY LONG)
@@ -453,6 +454,14 @@ def main():
 
     # TODO: Make this smaller and make it easier to test params without explicitly listing them!!!
 
+    # Best results :
+    #
+    # 0.8308972340903981["file_combination: [['profile_data/ryan/196-2.wav', 0], ['profile_data/ryan/197-2.wav', 0], ['profile_data/ryan/198-3.wav', 0], ['profile_data/ryan/198-1.wav', 0], ['profile_data/ryan/197-1.wav', 0], ['profile_data/matt/196-2.wav', 1], ['profile_data/matt/196-3.wav', 1], ['profile_data/matt/197-2.wav', 1], ['profile_data/matt/198-3.wav', 1], ['profile_data/matt/198-1.wav', 1], ['profile_data/matt/196-1.wav', 1], ['profile_data/matt/197-1.wav', 1]]", 'n_components: 19', 'covariance_type: tied']{'ryan': 1121, 'matt': 1832}
+
+#     0.8302226219923544["file_combination: [['profile_data/ryan/196-2.wav', 0], ['profile_data/ryan/197-3.wav', 0], ['profile_data/ryan/198-3.wav', 0], ['profile_data/ryan/198-1.wav', 0], ['profile_data/ryan/196-1.wav', 0], ['profile_data/matt/196-2.wav', 1], ['profile_data/matt/196-3.wav', 1], ['profile_data/matt/197-3.wav', 1], ['profile_data/matt/197-2.wav', 1], ['profile_data/matt/198-1.wav', 1], ['profile_data/matt/196-1.wav', 1], ['profile_data/matt/197-1.wav', 1]]", 'n_components: 22', 'covariance_type: tied']{'ryan': 1239, 'matt': 1972}
+#
+# 0.8308972340903981["file_combination: [['profile_data/ryan/196-2.wav', 0], ['profile_data/ryan/197-2.wav', 0], ['profile_data/ryan/198-3.wav', 0], ['profile_data/ryan/198-1.wav', 0], ['profile_data/ryan/197-1.wav', 0], ['profile_data/matt/196-2.wav', 1], ['profile_data/matt/196-3.wav', 1], ['profile_data/matt/197-2.wav', 1], ['profile_data/matt/198-3.wav', 1], ['profile_data/matt/198-1.wav', 1], ['profile_data/matt/196-1.wav', 1], ['profile_data/matt/197-1.wav', 1]]", 'n_components: 19', 'covariance_type: tied']{'ryan': 1121, 'matt': 1832}
+
     # Data directories for training and testing
     data_directory = 'profile_data/'
     test_directory = 'test_data/'
@@ -526,6 +535,9 @@ def main():
             train_corpus_dict = classifier.get_train_corpus_dict()
             out.write(str(current_accuracy)+str(current_params)+str(train_corpus_dict)+'\n')
             #print(current_accuracy, current_params)
+
+        elif test_gmm:
+
 
         elif test_preprocessing: # TODO: Include n_ccs in this?
             parameters_list = list(product(_use_emphasis, \
