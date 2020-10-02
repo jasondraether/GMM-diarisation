@@ -12,10 +12,37 @@ from itertools import chain, combinations, product
 from time import sleep, time
 from random import shuffle
 
+# 0.8214526647177872["file_combination: [['profile_data/ryan/197-3.wav', 0], ['profile_data/ryan/198-3.wav', 0], ['profile_data/ryan/198-1.wav', 0], ['profile_data/ryan/196-1.wav', 0], ['profile_data/ryan/197-1.wav', 0], ['profile_data/matt/196-2.wav', 1], ['profile_data/matt/196-3.wav', 1], ['profile_data/matt/197-2.wav', 1], ['profile_data/matt/198-3.wav', 1], ['profile_data/matt/198-1.wav', 1]]", 'n_components: 4', 'covariance_type: full']{'ryan': 1271, 'matt': 1476}
+# 0.8198785698223522["file_combination: [['profile_data/ryan/196-2.wav', 0], ['profile_data/ryan/197-2.wav', 0], ['profile_data/ryan/198-1.wav', 0], ['profile_data/ryan/197-1.wav', 0], ['profile_data/matt/196-2.wav', 1], ['profile_data/matt/197-2.wav', 1], ['profile_data/matt/198-3.wav', 1], ['profile_data/matt/198-1.wav', 1], ['profile_data/matt/197-1.wav', 1]]", 'n_components: 19', 'covariance_type: tied']
+
+# Test parameters randomly
+optimize_randomly = True
+
+# Testing Flags
+test_standard = True
+test_gmm_only = False
+test_small = False # Just test smaller enumerable parameters, no random shuffling
+test_all_parameters = False # This will test every parameter in the model (Warning: LONG)
+test_files_and_gmm = False # Just tests file combinations and GMM parameters
+test_files_and_parameters = False # This tests all file combinations and ALL parameters in the model (Warning: REALLY LONG)
+test_files_only = False # Just tests all file combinations
+test_preprocessing = False # Only test possible preprocessing steps
+n_files = 6 # Number of files to test, TOTAL (so, if 2 is put here, 1 for matt and 1 for ryan,
+# but not guaranteed to be evenly distributed, if 4 the split could be 3 and 1, but class will always have at least one file
+use_n_files = False # Whether or not to apply the n_files check
+
+# Caches to speed up testing
+cache = []
+cache_parameters = []
+cache_limit = 16
+
 class GMMClassifier:
 
     # Optimal parameters from testing should be placed in here
-    def __init__(self, data_directory='', from_directory=True, specify_files=False, files_list=[], classes=[]):
+    def __init__(self, data_directory='', from_directory=True, specify_files=False, files_list=[], classes=[],use_emphasis=True, normalize_signal=True, \
+    normalize_mfcc=False, use_deltas=True, trim_silence=False, use_ubm=False, ubm_directory='', \
+    pad_silence=False, n_ccs=20, n_components=3, covariance_type='full',win_len=0.5, \
+    win_step=0.01, frame_length=512, frame_skip=256, top_db=30):
 
         # Model information
         self.speaker_profiles = []
@@ -24,23 +51,46 @@ class GMMClassifier:
         self.n_classes = 0
         self.train_corpus_dict = {}
         self.sample_rate = 48000
-        self.use_emphasis = True
-        self.normalize_signal = True
-        self.normalize_mfcc = False
-        self.use_deltas = True
-        self.trim_silence = True
-        self.n_ccs = 20
-        self.n_components = 3
-        self.covariance_type = 'full'
-        self.win_len = 0.5
-        self.win_step = 0.01
-        self.frame_length = 512
-        self.frame_skip = 256
-        self.top_db = 30
+
+        # Signal preprocessing
+        self.use_emphasis = use_emphasis # Pre-emphasis filter
         self.emphasis_coefficient = 0.97
+
+        self.normalize_signal = normalize_signal # Signal energy normalize
         self.energy_multiplier = 0.05
         self.energy_range = 100
+
+        # MFCC's
+        self.n_ccs = n_ccs
         self.epsilon = 1e-10
+        self.normalize_mfcc = normalize_mfcc
+        self.use_deltas = use_deltas
+        self.win_len = win_len
+        self.win_step = win_step
+
+        # GMM
+        self.n_components = n_components
+        self.covariance_type = covariance_type
+        self.use_ubm = use_ubm
+        self.n_ubm_components = 2048
+        self.ubm_covariance_type = 'tied'
+        self.decision_threshold = 0 # Adding this in to be used with ubm eventually
+        self.max_iter= 500
+
+        # Trimming silence
+        self.frame_length = frame_length
+        self.frame_skip = frame_skip
+        self.top_db = top_db
+        self.trim_silence = trim_silence
+        self.pad_silence = pad_silence # Pad silence (zeros) on each end
+        self.pad_length = 100 # This number in ms for each side
+
+        # Debugging (Makes a bunch of graphs pop up)
+        self.graph = False
+        self.graph_dataset = False
+
+        if self.graph_dataset:
+            self.figure = plt.figure()
 
         # Initialize model from directory
         if from_directory:
@@ -55,7 +105,36 @@ class GMMClassifier:
                     class_training_files.append(training_path)
                 self.add_profile(label=classes[class_id],files=class_training_files)
 
+        if use_ubm:
+            assert os.path.exists(ubm_directory)
+            ubm_training_files = []
+            ubm_files = os.listdir(ubm_directory)
+            for filename in ubm_files:
+                ubm_path = os.path.join(ubm_directory,filename)
+                ubm_training_files.append(ubm_path)
+            self.add_profile(label='ubm',files=ubm_training_files)
+
+        self.current_params = ['use_emphasis: {0}'.format(use_emphasis), \
+                          'normalize_signal: {0}'.format(normalize_signal), \
+                          'normalize_mfcc: {0}'.format(normalize_mfcc), \
+                          'use_deltas: {0}'.format(use_deltas), \
+                          'trim_silence: {0}'.format(trim_silence), \
+                          'use_ubm: {0}'.format(use_ubm), \
+                          'n_ccs: {0}'.format(n_ccs), \
+                          'covariance_type: {0}'.format(covariance_type), \
+                          'n_components: {0}'.format(n_components), \
+                          'win_len: {0}'.format(win_len), \
+                          'win_step: {0}'.format(win_step), \
+                          'frame_length: {0}'.format(frame_length), \
+                          'frame_skip: {0}'.format(frame_skip), \
+                          'top_db: {0}'.format(top_db)]
+
     def add_profile(self, label='', files=''):
+
+        # So we can use this globally
+        global cache
+        global cache_limit
+        global cache_parameters
 
         # Initialize training corpus dictionary
         self.train_corpus_dict[label] = 0
@@ -390,7 +469,6 @@ def main():
 
     # Data directories for training and testing
     data_directory = 'profile_data/'
-    validation_directory = 'validation_data/'
     test_directory = 'test_data/'
     ubm_directory = 'ubm_data/'
 
@@ -508,7 +586,7 @@ def main():
                                            trim_silence=trim_silence, \
                                            n_ccs=n_ccs)
 
-                current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=validation_directory)
+                current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
                 best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
                 train_corpus_dict = classifier.get_train_corpus_dict()
                 out.write(str(current_accuracy)+str(current_params)+str(train_corpus_dict)+'\n')
@@ -558,7 +636,7 @@ def main():
                                                n_components=n_components, \
                                                covariance_type=covariance_type)
 
-                    current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=validation_directory)
+                    current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
                     best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
 
                     train_corpus_dict = classifier.get_train_corpus_dict()
@@ -636,7 +714,7 @@ def main():
                                                                    frame_skip=frame_skip, \
                                                                    top_db=top_db)
 
-                                        current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=validation_directory)
+                                        current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
                                         best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
 
                                         train_corpus_dict = classifier.get_train_corpus_dict()
@@ -692,7 +770,7 @@ def main():
                                 training_filenames = parse_files(file_combination_flat,class_id)
                                 classifier.add_profile(label=classes[class_id],files=training_filenames)
 
-                            current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=validation_directory)
+                            current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
                             best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
 
                             train_corpus_dict = classifier.get_train_corpus_dict()
@@ -713,7 +791,7 @@ def main():
                         training_filenames = parse_files(file_combination_flat,class_id)
                         classifier.add_profile(label=classes[class_id],files=training_filenames)
 
-                    current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=validation_directory)
+                    current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
                     best_accuracy, best_params = keep_best(best_accuracy, best_params, current_accuracy, current_params)
 
                     train_corpus_dict = classifier.get_train_corpus_dict()
@@ -798,7 +876,7 @@ def main():
                                                     training_filenames = parse_files(file_combination_flat,class_id)
                                                     classifier.add_profile(label=classes[class_id],files=training_filenames)
 
-                                                current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=validation_directory)
+                                                current_accuracy, test_corpus_dict = classifier.evaluate_model(test_directory=test_directory)
                                                 best_accuracy, best_params = keep_best(best_accuracy,best_params, current_accuracy, current_params)
 
                                                 train_corpus_dict = classifier.get_train_corpus_dict()
@@ -826,7 +904,7 @@ def main():
         video_height = 1080
         FPS = 60
         max_seconds = 100 # Animation will stop after max_seconds seconds
-        interval_length = 1.0 # How many second intervals to slice podcast into
+        interval_length = 0.5 # How many second intervals to slice podcast into
 
         fourcc = VideoWriter_fourcc(*'mp4v')
         video = VideoWriter(animation_filename, fourcc, float(FPS), (video_width,video_height))
@@ -852,18 +930,14 @@ def main():
 
         for start in range(0,n_samples-sample_length,sample_length):
             llh = classifier.predict_from_array(signal=podcast[start:start+sample_length],sample_rate=sample_rate)
-            n_llh = llh.shape[0]
-            predictions = [0 for i in range(n_classes)]
-            for l in llh:
-                prediction_class = np.argmax(l)
-                predictions[prediction_class] += 1
-
-            prediction = np.argmax(predictions)
-            print(predictions,prediction)
+            prediction = np.argmax(np.mean(llh,axis=0))
+            print(llh)
+            print(prediction)
 
             for f in range(frames_per_prediction):
 
                 if f > animation_range_lower and f < animation_range_upper:
+                    print("Here")
                     video.write(still_frame)
                 else:
                     video.write(class_frames[prediction])
