@@ -12,6 +12,27 @@ from itertools import chain, combinations, product
 from time import sleep, time
 from random import shuffle
 
+# Test parameters randomly
+optimize_randomly = True
+
+# Testing Flags
+test_standard = False
+test_small = False # Just test smaller enumerable parameters, no random shuffling
+test_gmm = True # Test GMM params
+test_all_parameters = False # This will test every parameter in the model (Warning: LONG)
+test_files_and_gmm = True # Just tests file combinations and GMM parameters
+test_files_and_parameters = False # This tests all file combinations and ALL parameters in the model (Warning: REALLY LONG)
+test_files_only = False # Just tests all file combinations
+test_preprocessing = False # Only test possible preprocessing steps
+n_files = 6 # Number of files to test, TOTAL (so, if 2 is put here, 1 for matt and 1 for ryan,
+# but not guaranteed to be evenly distributed, if 4 the split could be 3 and 1, but class will always have at least one file
+use_n_files = False # Whether or not to apply the n_files check
+
+# Caches to speed up testing
+cache = []
+cache_parameters = []
+cache_limit = 16
+
 class GMMClassifier:
 
     # Optimal parameters from testing should be placed in here
@@ -387,6 +408,14 @@ def keep_best(best_accuracy,best_params,current_accuracy,current_params):
 def main():
 
     # TODO: Make this smaller and make it easier to test params without explicitly listing them!!!
+
+    # Best results :
+    #
+    # 0.8308972340903981["file_combination: [['profile_data/ryan/196-2.wav', 0], ['profile_data/ryan/197-2.wav', 0], ['profile_data/ryan/198-3.wav', 0], ['profile_data/ryan/198-1.wav', 0], ['profile_data/ryan/197-1.wav', 0], ['profile_data/matt/196-2.wav', 1], ['profile_data/matt/196-3.wav', 1], ['profile_data/matt/197-2.wav', 1], ['profile_data/matt/198-3.wav', 1], ['profile_data/matt/198-1.wav', 1], ['profile_data/matt/196-1.wav', 1], ['profile_data/matt/197-1.wav', 1]]", 'n_components: 19', 'covariance_type: tied']{'ryan': 1121, 'matt': 1832}
+
+#     0.8302226219923544["file_combination: [['profile_data/ryan/196-2.wav', 0], ['profile_data/ryan/197-3.wav', 0], ['profile_data/ryan/198-3.wav', 0], ['profile_data/ryan/198-1.wav', 0], ['profile_data/ryan/196-1.wav', 0], ['profile_data/matt/196-2.wav', 1], ['profile_data/matt/196-3.wav', 1], ['profile_data/matt/197-3.wav', 1], ['profile_data/matt/197-2.wav', 1], ['profile_data/matt/198-1.wav', 1], ['profile_data/matt/196-1.wav', 1], ['profile_data/matt/197-1.wav', 1]]", 'n_components: 22', 'covariance_type: tied']{'ryan': 1239, 'matt': 1972}
+#
+# 0.8308972340903981["file_combination: [['profile_data/ryan/196-2.wav', 0], ['profile_data/ryan/197-2.wav', 0], ['profile_data/ryan/198-3.wav', 0], ['profile_data/ryan/198-1.wav', 0], ['profile_data/ryan/197-1.wav', 0], ['profile_data/matt/196-2.wav', 1], ['profile_data/matt/196-3.wav', 1], ['profile_data/matt/197-2.wav', 1], ['profile_data/matt/198-3.wav', 1], ['profile_data/matt/198-1.wav', 1], ['profile_data/matt/196-1.wav', 1], ['profile_data/matt/197-1.wav', 1]]", 'n_components: 19', 'covariance_type: tied']{'ryan': 1121, 'matt': 1832}
 
     # Data directories for training and testing
     data_directory = 'profile_data/'
