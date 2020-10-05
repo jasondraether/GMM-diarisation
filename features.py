@@ -15,7 +15,7 @@ class FeatureExtractor(object):
 
         default_params = {
         'log_filename' : 'session.log',
-        'sample_rate' : 48000,
+        'sample_rate' : 48000, # 32 float PCM
 
         'use_emphasis' : True,
         'emphasis_coefficient' : 0.97,
@@ -26,12 +26,12 @@ class FeatureExtractor(object):
 
         'n_ccs' : 20,
         'normalize_mfcc' : False,
-        'max_order' : 2,
+        'max_order' : 1,
         'use_deltas' : True,
-        'win_len' : 0.25,
+        'win_len' : 0.02,
         'win_step' : 0.01,
 
-        'trim_silence' : True,
+        'trim_silence' : False,
         'frame_length' : 512,
         'frame_skip' : 256,
         'top_db' : 30
@@ -39,10 +39,7 @@ class FeatureExtractor(object):
 
         # Update default params with user params
         self.params = default_params
-        assert type(params) == dict
-        for key, value in params.items():
-            assert self.params.get(key) != None # Make sure it is a valid param
-            self.params[key] = value
+        self.set_params(params=params)
 
         # Logger setup
         logging.basicConfig(filename=self.params['log_filename'],level=logging.DEBUG,filemode='w')
@@ -78,7 +75,14 @@ class FeatureExtractor(object):
         # Other params initialized
         self.speaker_profiles = {} # Dictionary of GMM models, indexed by class name
 
+    def set_params(self, params={}):
+        if type(params) != dict: raise TypeError('Input params must be dictionary.')
+        for key, value in params.items():
+            if self.params.get(key) == None: raise ValueError('Parameter {0} does not exist within class'.format(key))
+            self.params[key] = value
 
+    def get_params(self):
+        return self.params
 
     # From: http://jamesmontgomery.us/blog/Voice_Recognition_Model.html
     def apply_emphasis(self, signal):
@@ -141,8 +145,8 @@ class FeatureExtractor(object):
                      # Mfcc or something?
 
         if self.normalize_mfcc:
-            mean = np.mean(mfcc_feats,axis=0)
-            std = np.mean(mfcc_feats,axis=0)
+            mean = np.mean(mfccs,axis=0)
+            std = np.mean(mfccs,axis=0)
             mfccs = (mfccs - mean)/std
 
         return mfccs
@@ -173,9 +177,9 @@ class FeatureExtractor(object):
 
     # Given .wav file filename (must be full path), return features array
     def extract_features_file(self, filename=''):
-        assert os.path.exists(filename)
+        if not os.path.exists(filename): raise ValueError('Filename {0} does not exist.'.format(filename))
         sample_rate, signal = wavfile.read(filename)
-        assert sample_rate == self.sample_rate
+        if sample_rate != self.sample_rate: raise ValueError('Sample rate mismatch. {0} =/= {1}'.format(sample_rate,self.sample_rate))
         return self.extract_features(signal)
 
     # If concatenate, return np array of all features concatenated
@@ -183,8 +187,7 @@ class FeatureExtractor(object):
     def extract_features_files(self, files=[], concatenate=True):
         all_features = []
         for file in files:
-            if not os.path.exists(file):
-                raise ValueError('Filename {0} does not exist.'.format(file))
+            if not os.path.exists(file): raise ValueError('Filename {0} does not exist.'.format(file))
 
             file_features = self.extract_features_file(file)
             all_features.append(file_features)
@@ -200,7 +203,7 @@ class FeatureExtractor(object):
 
     # Given directory name, return features array (must be 1-level)
     def extract_features_dir(self, dir='', concatenate=True):
-        assert os.path.exists(dir)
+        if not os.path.exists(dir): raise ValueError('Directory {0} does not exist.'.format(dir))
         files_list = os.listdir(dir)
         filenames = []
         for file in files_list:
