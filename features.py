@@ -24,11 +24,11 @@ class FeatureExtractor(object):
         'energy_multiplier' : 0.05,
         'energy_range' : 100,
 
-        'n_ccs' : 5,
+        'n_ccs' : 13,
         'normalize_mfcc' : False,
         'max_order' : 2,
         'use_deltas' : True,
-        'win_len' : 0.2,
+        'win_len' : 0.05,
         'win_step' : 0.01,
         'delta_width': 9,
 
@@ -73,9 +73,6 @@ class FeatureExtractor(object):
         self.frame_length = self.params.get('frame_length')
         self.frame_skip = self.params.get('frame_skip')
         self.top_db = self.params.get('top_db')
-
-        # Other params initialized
-        self.speaker_profiles = {} # Dictionary of GMM models, indexed by class name
 
     def set_params(self, params={}):
         if type(params) != dict: raise TypeError('Input params must be dictionary.')
@@ -161,7 +158,7 @@ class FeatureExtractor(object):
             if n_data % 2: # If data is odd, we can set it to n_data
                 width = n_data
             else:
-                width = n_data - 1 # Otherwise, we need to make it odd 
+                width = n_data - 1 # Otherwise, we need to make it odd
 
         delta_feats = np.zeros((n_data,self.n_ccs*self.max_order))
         for order in range(self.max_order):

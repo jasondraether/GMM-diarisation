@@ -29,10 +29,10 @@ def plot_matrix(X, y, labels):
         X_dataframe[:,0:D] = X_class
         X_dataframe[:,D] = class_id
 
-        d_frames.append(pd.DataFrame(X_dataframe,columns=columns))
+        d_frames.append(pd.DataFrame(X_dataframe[:300,:],columns=columns))
 
     all_frames = pd.concat(d_frames)
     print('Plotting...')
     print(all_frames)
-    sns.pairplot(all_frames.sample(50), hue='Label')
+    sns.pairplot(all_frames, hue='Label')
     plt.show()

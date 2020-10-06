@@ -26,7 +26,7 @@ class SpeakerDiarizer(object):
         logging.basicConfig(filename=self.params['log_filename'],level=logging.DEBUG,filemode='w')
         self.logger = logging.getLogger('model')
 
-        # GMM Parameters
+        # GMM Parameters (TODO: Add unique components per class)
         self.n_components = self.params.get('n_components')
         self.covariance_type = self.params.get('covariance_type')
         self.max_iter = self.params.get('max_iter')

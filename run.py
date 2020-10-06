@@ -50,7 +50,7 @@ y_test = np.concatenate(y_test,axis=0)
 n_train = y_train.shape[0]
 n_test = y_test.shape[0]
 
-mfccplot.plot_matrix(X_train,y_train,labels=classes)
+mfccplot.plot_matrix(X_train[:,:5],y_train,labels=classes)
 
 print('Training with {0} data points, testing with {1} data points'.format(n_train,n_test))
 
