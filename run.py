@@ -2,7 +2,7 @@ import numpy as np
 import os
 
 # Local modules
-from model import SpeakerDiarizer
+from model import GMMDiarizer
 from features import FeatureExtractor
 import mfccplot
 
@@ -15,7 +15,7 @@ y_test = []
 
 # Instantiate model and feature extractor
 d_params = {}
-diarizer = SpeakerDiarizer(d_params)
+diarizer = GMMDiariser(d_params)
 
 f_params = {}
 extractor = FeatureExtractor(f_params)

@@ -1,5 +1,5 @@
 from bayes_opt import BayesianOptimization
-from model import SpeakerDiarizer
+from model import GMMDiariser
 from features import FeatureExtractor
 import os
 import numpy as np
@@ -26,7 +26,7 @@ def run_instance(
     d_params = {'n_components':int(n_components), \
                 'max_iter':int(max_iter)
     }
-    diarizer = SpeakerDiarizer(d_params)
+    diarizer = GMMDiariser(d_params)
 
     f_params = {'emphasis_coefficient':emphasis_coefficient, \
                 'energy_multiplier':energy_multiplier, \

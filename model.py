@@ -6,7 +6,7 @@ from time import sleep, time
 from random import shuffle
 import logging
 
-class SpeakerDiarizer(object):
+class GMMDiariser(object):
 
     def __init__(self, params={}):
 
