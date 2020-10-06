@@ -37,6 +37,7 @@ def generate_animation(speaker_timestamps):
         end_timestamp = datum[2]
         n_still_frames = int(FPS*(start_timestamp - current_time))
         n_class_frames = int(FPS*(timestamp-current_time))
+        for f in range(n_still_frames):
 
 
 
