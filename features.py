@@ -24,14 +24,15 @@ class FeatureExtractor(object):
         'energy_multiplier' : 0.05,
         'energy_range' : 100,
 
-        'n_ccs' : 20,
+        'n_ccs' : 5,
         'normalize_mfcc' : False,
-        'max_order' : 1,
+        'max_order' : 2,
         'use_deltas' : True,
-        'win_len' : 0.02,
+        'win_len' : 0.2,
         'win_step' : 0.01,
+        'delta_width': 9,
 
-        'trim_silence' : False,
+        'trim_silence' : True,
         'frame_length' : 512,
         'frame_skip' : 256,
         'top_db' : 30
@@ -65,6 +66,7 @@ class FeatureExtractor(object):
         self.max_order = self.params.get('max_order')
         self.win_len = self.params.get('win_len')
         self.win_step = self.params.get('win_step')
+        self.delta_width = self.params.get('delta_width')
 
         # Silence trimming
         self.trim_silence = self.params.get('trim_silence')
@@ -154,9 +156,16 @@ class FeatureExtractor(object):
     def calculate_mfcc_deltas(self, mfccs):
         # If order is 2, we want to calculate order=1, and order=2
         n_data = mfccs.shape[0]
+        width = self.delta_width
+        if n_data < self.delta_width:
+            if n_data % 2: # If data is odd, we can set it to n_data
+                width = n_data
+            else:
+                width = n_data - 1 # Otherwise, we need to make it odd 
+
         delta_feats = np.zeros((n_data,self.n_ccs*self.max_order))
         for order in range(self.max_order):
-            delta_feats[:,order*self.n_ccs:(order+1)*self.n_ccs] = delta(mfccs,order=order+1)
+            delta_feats[:,order*self.n_ccs:(order+1)*self.n_ccs] = delta(mfccs,order=order+1,axis=0,width=width)
         return delta_feats
 
     # Given .wav data X, return features array
