@@ -4,7 +4,7 @@ from cv2 import VideoWriter, VideoWriter_fourcc, imread
 
 # Given speaker timestamps: [('class'(string),start_timestamp(float64),end_timestamp(float64)),(),(),...,()],
 # generate animation for speaker at timestamp
-def generate_animation(speaker_timestamps):
+def generate_animation(speaker_timestamps, classes):
     target_podcast = '' # Input target path of audio file for diarisations
     animation_directory = 'animation_data/' # Path of animation files
     animation_filename = 'animation.mp4' # Path of output animation (without audio)
@@ -24,11 +24,11 @@ def generate_animation(speaker_timestamps):
     still_frame = imread(os.path.join(animation_directory, animation_filename))
 
     # Read in image of a single speaker talking
-    class_frames = []
-    for class_id in range(len(classes)):
-        class_frame_filename = os.path.join(animation_directory,classes[class_id]+'.png')
+    class_frames = {}
+    for class_name in classes:
+        class_frame_filename = os.path.join(animation_directory,class_name+'.png')
         frame = imread(class_frame_filename)
-        class_frames.append(frame)
+        class_frames[class_name] = frame
 
     current_time = 0.0
     for datum in speaker_timestamps:
@@ -37,31 +37,15 @@ def generate_animation(speaker_timestamps):
         end_timestamp = datum[2]
         n_still_frames = int(FPS*(start_timestamp - current_time))
         n_class_frames = int(FPS*(timestamp-current_time))
+        new_frame = still_frame
+
         for f in range(n_still_frames):
+            video.write(new_frame)
+        new_frame = class_frames[speaker]
+        for f in range(n_class_frames):
+            video.write(new_frame)
 
-
-
-    sample_rate, podcast = wavfile.read(target_podcast)
-    n_samples = podcast.shape[0]
-    n_seconds = n_samples//sample_rate
-    sample_length = int(interval_length*sample_rate)
-    frames_per_prediction = int(interval_length*FPS)
-
-    animation_range_upper = (frames_per_prediction*2)//3
-    animation_range_lower = (frames_per_prediction)//3
-
-
-        for f in range(frames_per_prediction):
-
-            if f > animation_range_lower and f < animation_range_upper:
-                video.write(still_frame)
-            else:
-                video.write(class_frames[prediction])
-
-        timestamp = start/sample_rate
-        print("Wrote timestamp {0}".format(timestamp))
-
-        if timestamp >= max_seconds:
+        if end_timestamp >= max_seconds:
             print("Exceeded max seconds")
             break
 
